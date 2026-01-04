@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen">
     <!-- Navigation - Transparent overlay -->
-    <Navigation />
+    <Navigation @open-news="isNewsOpen = true" />
     
     <!-- Hero Slider -->
     <HeroSlider />
@@ -47,6 +47,9 @@
 
     <!-- Back to Top Button -->
     <BackToTop />
+
+    <!-- News Modal -->
+    <NewsModal :is-open="isNewsOpen" @close="isNewsOpen = false" />
   </div>
 </template>
 
@@ -70,9 +73,11 @@ import LocationSection from './components/LocationSection.vue'
 import ThankYouDivider from './components/ThankYouDivider.vue'
 import Footer from './components/Footer.vue'
 import BackToTop from './components/BackToTop.vue'
+import NewsModal from './components/NewsModal.vue'
 
 const vueVersion = ref(version)
 const gsapLoaded = ref(false)
+const isNewsOpen = ref(false)
 
 onMounted(() => {
   gsapLoaded.value = true

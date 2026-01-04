@@ -145,6 +145,10 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import gsap from 'gsap'
 
+const emit = defineEmits<{
+  (e: 'openNews'): void
+}>()
+
 interface NavItem {
   id: string
   label: string
@@ -154,10 +158,11 @@ interface NavItem {
 const navItems: NavItem[] = [
   { id: 'home', label: 'Home', href: '#home' },
   { id: 'about', label: 'About Us', href: '#about' },
+  { id: 'news', label: 'News', href: '#news' },
   { id: 'menu', label: 'Menu', href: '#menu' },
   { id: 'reservations', label: 'Reservation & Delivery', href: '#reservations' },
   { id: 'testimonials', label: 'Testimonials', href: '#testimonials' },
-  { id: 'location', label: 'Location & Contact us', href: '#location' },
+  { id: 'location', label: 'Contact Us', href: '#location' },
 ]
 
 const navRef = ref<HTMLElement | null>(null)
@@ -190,6 +195,12 @@ const scrollToTop = () => {
 const scrollToSection = (sectionId: string) => {
   if (sectionId === 'home') {
     scrollToTop()
+    return
+  }
+  
+  if (sectionId === 'news') {
+    isMobileMenuOpen.value = false
+    emit('openNews')
     return
   }
   
@@ -250,7 +261,7 @@ const handleScroll = () => {
 
   // Determine active section based on scroll position
   const sections = navItems
-    .filter(item => item.id !== 'home') // Exclude home from section detection
+    .filter(item => item.id !== 'home' && item.id !== 'news') // Exclude home and news from section detection
     .map(item => ({
       id: item.id,
       element: document.getElementById(item.id)
