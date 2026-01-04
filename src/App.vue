@@ -12,16 +12,8 @@
     <!-- About Us Section -->
     <AboutSection />
 
-    <section id="menu" class="min-h-screen flex items-center justify-center bg-background-cream py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-5xl font-bold text-primary-red mb-8 text-center">
-          Speisekarte
-        </h2>
-        <p class="text-lg text-primary-dark max-w-3xl mx-auto text-center">
-          Test section for navigation highlighting
-        </p>
-      </div>
-    </section>
+    <!-- Menu Section -->
+    <MenuSection />
 
     <section id="gallery" class="min-h-screen flex items-center justify-center bg-white py-20">
       <div class="container mx-auto px-4">
@@ -86,6 +78,7 @@ import Navigation from './components/Navigation.vue'
 import HeroSlider from './components/HeroSlider.vue'
 import StoryDivider from './components/StoryDivider.vue'
 import AboutSection from './components/AboutSection.vue'
+import MenuSection from './components/MenuSection.vue'
 import BackToTop from './components/BackToTop.vue'
 
 const vueVersion = ref(version)
