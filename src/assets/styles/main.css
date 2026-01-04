@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-serif text-primary-dark bg-background-cream;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background-cream;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-red rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-banner;
+  }
+}
+
+@layer utilities {
+  /* Smooth scroll offset for fixed navigation */
+  section {
+    scroll-margin-top: 5rem; /* 80px */
+  }
+
+  @media (min-width: 768px) {
+    section {
+      scroll-margin-top: 6rem; /* 96px for larger screens */
+    }
+  }
+}
+
+@layer components {
+  /* Restaurant-style navigation enhancements */
+  .nav-link-active {
+    position: relative;
+  }
+  
+  .nav-link-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #A80002, transparent);
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+

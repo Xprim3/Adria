@@ -1,0 +1,185 @@
+<template>
+  <section id="home" class="relative h-screen w-full overflow-hidden">
+    <!-- Slider Container -->
+    <div ref="sliderRef" class="relative h-full w-full">
+      <!-- Slide Items -->
+      <div
+        v-for="(slide, index) in slides"
+        :key="index"
+        :ref="el => { if (el) slideRefs[index] = el as HTMLElement }"
+        class="absolute inset-0 transition-opacity duration-1000"
+        :class="currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 z-0'"
+      >
+        <!-- Background Image -->
+        <div 
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000"
+          :class="currentSlide === index ? 'scale-100' : 'scale-110'"
+          :style="{ backgroundImage: `url(${slide.image})` }"
+        >
+          <!-- Overlay gradient -->
+          <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+        </div>
+
+        <!-- Slide Content -->
+        <div class="relative z-10 h-full flex items-center justify-center">
+          <div class="container mx-auto px-4 text-center">
+            <div 
+              ref="el => { if (el && currentSlide === index) contentRefs[index] = el as HTMLElement }"
+              class="max-w-4xl mx-auto"
+            >
+              <h1 
+                class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-2xl"
+              >
+                {{ slide.title }}
+              </h1>
+              <p 
+                class="text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-lg"
+              >
+                {{ slide.subtitle }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <div class="flex justify-center items-center">
+        <svg
+          class="w-6 h-6 text-white/80"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
+
+interface Slide {
+  image: string
+  title: string
+  subtitle: string
+}
+
+const slides: Slide[] = [
+  {
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    title: 'Willkommen bei Pizzeria Adria',
+    subtitle: 'Authentische italienische Küche in Trier-Quint'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+    title: 'Frische Zutaten, Traditionelle Rezepte',
+    subtitle: 'Jeden Tag frisch zubereitet mit Liebe'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2081&q=80',
+    title: 'Genießen Sie den Geschmack Italiens',
+    subtitle: 'Von klassisch bis kreativ - für jeden Geschmack'
+  }
+]
+
+const sliderRef = ref<HTMLElement | null>(null)
+const slideRefs = ref<(HTMLElement | null)[]>([])
+const contentRefs = ref<(HTMLElement | null)[]>([])
+const currentSlide = ref(0)
+let slideInterval: number | null = null
+
+const goToSlide = (index: number) => {
+  if (index === currentSlide.value) return
+  
+  const prevIndex = currentSlide.value
+  currentSlide.value = index
+
+  // Animate content
+  const prevContent = contentRefs.value[prevIndex]
+  const newContent = contentRefs.value[index]
+
+  if (prevContent) {
+    gsap.to(prevContent, {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      ease: 'power2.in'
+    })
+  }
+
+  if (newContent) {
+    gsap.fromTo(newContent,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        delay: 0.3
+      }
+    )
+  }
+
+  // Reset interval
+  if (slideInterval) {
+    clearInterval(slideInterval)
+  }
+  startSlideShow()
+}
+
+const startSlideShow = () => {
+  slideInterval = window.setInterval(() => {
+    const nextSlide = (currentSlide.value + 1) % slides.length
+    goToSlide(nextSlide)
+  }, 5000) // Change slide every 5 seconds
+}
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const headerHeight = 80
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+    const offsetPosition = elementPosition - headerHeight
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+onMounted(() => {
+  // Animate first slide content
+  if (contentRefs.value[0]) {
+    gsap.fromTo(contentRefs.value[0],
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.5
+      }
+    )
+  }
+
+  startSlideShow()
+})
+
+onUnmounted(() => {
+  if (slideInterval) {
+    clearInterval(slideInterval)
+  }
+})
+</script>
+
