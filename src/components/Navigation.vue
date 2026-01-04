@@ -155,8 +155,9 @@ const navItems: NavItem[] = [
   { id: 'home', label: 'Home', href: '#home' },
   { id: 'about', label: 'About Us', href: '#about' },
   { id: 'menu', label: 'Menu', href: '#menu' },
-  { id: 'gallery', label: 'Gallery', href: '#gallery' },
-  { id: 'contact', label: 'Contact', href: '#contact' },
+  { id: 'reservations', label: 'Reservation & Delivery', href: '#reservations' },
+  { id: 'testimonials', label: 'Testimonials', href: '#testimonials' },
+  { id: 'location', label: 'Location & Contact us', href: '#location' },
 ]
 
 const navRef = ref<HTMLElement | null>(null)
@@ -171,7 +172,27 @@ const isMobileMenuOpen = ref(false)
 const activeSection = ref('home')
 const isScrollingProgrammatically = ref(false)
 
+const scrollToTop = () => {
+  isMobileMenuOpen.value = false
+  activeSection.value = 'home'
+  isScrollingProgrammatically.value = true
+  
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+  
+  setTimeout(() => {
+    isScrollingProgrammatically.value = false
+  }, 1000)
+}
+
 const scrollToSection = (sectionId: string) => {
+  if (sectionId === 'home') {
+    scrollToTop()
+    return
+  }
+  
   const element = document.getElementById(sectionId)
   if (element) {
     isMobileMenuOpen.value = false
@@ -221,11 +242,19 @@ const handleScroll = () => {
     return
   }
 
+  // If at the top, set home as active
+  if (window.scrollY < 100) {
+    activeSection.value = 'home'
+    return
+  }
+
   // Determine active section based on scroll position
-  const sections = navItems.map(item => ({
-    id: item.id,
-    element: document.getElementById(item.id)
-  }))
+  const sections = navItems
+    .filter(item => item.id !== 'home') // Exclude home from section detection
+    .map(item => ({
+      id: item.id,
+      element: document.getElementById(item.id)
+    }))
 
   const scrollPosition = window.scrollY
   const headerHeight = 150 // Increased threshold

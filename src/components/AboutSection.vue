@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="relative bg-white overflow-hidden">
+  <section class="relative bg-white overflow-hidden">
     <!-- Main Content Grid - Full Width -->
     <div class="grid md:grid-cols-2 md:h-[650px]">
       <!-- Image Side - Full Width -->
@@ -18,12 +18,12 @@
       <!-- Text Side - Full Width -->
       <div 
         ref="textRef"
-        class="flex items-center justify-center p-8 md:p-12 lg:p-16 bg-background-cream order-1 md:order-2 w-full md:h-full overflow-y-auto"
+        class="flex items-center justify-center p-6 sm:p-8 md:p-10 lg:p-12 bg-background-cream order-1 md:order-2 w-full md:h-full overflow-y-auto"
       >
         <div class="max-w-2xl w-full">
           <!-- Owner's Story -->
           <div>
-            <div class="space-y-4 text-base md:text-lg text-primary-dark/70 leading-relaxed font-sans">
+            <div class="space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed font-sans">
               <p class="font-light">
                 I discovered my passion for Italian cuisine during my early years working in kitchens across Italy, where I learned the art of traditional pizza making and pasta craftsmanship. Those formative years taught me that authentic Italian cooking isn't just about recipes—it's about technique, quality ingredients, and the patience to let flavors develop naturally.
               </p>
@@ -33,7 +33,7 @@
               <p class="font-light">
                 Today, Pizzeria Adria continues to thrive as a family-run establishment where every dish tells a story. We've maintained our dedication to traditional techniques while creating a warm, welcoming atmosphere that makes every guest feel like part of our extended family. The restaurant has become more than a business—it's a gathering place where memories are made over shared meals and genuine hospitality.
               </p>
-              <p class="font-light text-primary-dark/80 mt-4 text-right" style="font-family: 'Italianno', cursive; font-weight: 400; font-size: 1.75rem;">
+              <p class="font-light text-primary-dark/85 mt-6 md:mt-8 text-right text-xl sm:text-2xl md:text-3xl" style="font-family: 'Italianno', cursive; font-weight: 400;">
                 — Bashkim Aliu
               </p>
             </div>

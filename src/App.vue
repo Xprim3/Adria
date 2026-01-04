@@ -12,58 +12,38 @@
     <!-- About Us Section -->
     <AboutSection />
 
+    <!-- Menu Divider -->
+    <MenuDivider />
+
     <!-- Menu Section -->
     <MenuSection />
 
-    <section id="gallery" class="min-h-screen flex items-center justify-center bg-white py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-5xl font-bold text-primary-red mb-8 text-center">
-          Galerie
-        </h2>
-        <p class="text-lg text-primary-dark max-w-3xl mx-auto text-center">
-          Test section for navigation highlighting
-        </p>
-      </div>
-    </section>
+    <!-- Section Divider -->
+    <SectionDivider />
 
-    <section id="contact" class="min-h-screen flex items-center justify-center bg-background-cream py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-5xl font-bold text-primary-red mb-8 text-center">
-          Kontakt
-        </h2>
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
-          <h3 class="text-2xl font-semibold mb-4 text-primary-dark">
-            Technology Stack Test
-          </h3>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Vue 3: {{ vueVersion }}</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>TypeScript: Working</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Vite: Development server running</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Tailwind CSS: Styled with brand colors</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>GSAP: {{ gsapLoaded ? 'Loaded' : 'Loading...' }}</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Hero Slider: Working</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <!-- Reservation Section -->
+    <ReservationSection />
+
+    <!-- Delivery Section -->
+    <DeliverySection />
+
+    <!-- Testimonials Divider -->
+    <TestimonialsDivider />
+
+    <!-- Testimonials Section -->
+    <TestimonialsSection />
+
+    <!-- Location Divider -->
+    <LocationDivider />
+
+    <!-- Location Section -->
+    <LocationSection />
+
+    <!-- Thank You Divider -->
+    <ThankYouDivider />
+
+    <!-- Footer -->
+    <Footer />
 
     <!-- Back to Top Button -->
     <BackToTop />
@@ -78,7 +58,17 @@ import Navigation from './components/Navigation.vue'
 import HeroSlider from './components/HeroSlider.vue'
 import StoryDivider from './components/StoryDivider.vue'
 import AboutSection from './components/AboutSection.vue'
+import MenuDivider from './components/MenuDivider.vue'
 import MenuSection from './components/MenuSection.vue'
+import SectionDivider from './components/SectionDivider.vue'
+import ReservationSection from './components/ReservationSection.vue'
+import DeliverySection from './components/DeliverySection.vue'
+import TestimonialsDivider from './components/TestimonialsDivider.vue'
+import TestimonialsSection from './components/TestimonialsSection.vue'
+import LocationDivider from './components/LocationDivider.vue'
+import LocationSection from './components/LocationSection.vue'
+import ThankYouDivider from './components/ThankYouDivider.vue'
+import Footer from './components/Footer.vue'
 import BackToTop from './components/BackToTop.vue'
 
 const vueVersion = ref(version)

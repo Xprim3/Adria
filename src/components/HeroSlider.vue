@@ -28,12 +28,12 @@
               class="max-w-4xl mx-auto"
             >
               <h1 
-                class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-2xl"
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-5 md:mb-6 drop-shadow-2xl leading-tight"
               >
                 {{ slide.title }}
               </h1>
               <p 
-                class="text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-lg"
+                class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-lg leading-relaxed"
               >
                 {{ slide.subtitle }}
               </p>

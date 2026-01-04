@@ -1,5 +1,5 @@
 <template>
-  <section id="menu" class="relative bg-gradient-to-b from-background-cream/30 via-white to-background-cream/30 py-16 md:py-24 overflow-hidden">
+  <section class="relative bg-gradient-to-b from-background-cream/30 via-white to-background-cream/30 py-12 md:py-16 lg:py-20 overflow-hidden">
     <!-- Decorative Background Elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute top-20 left-10 w-64 h-64 bg-primary-red/5 rounded-full blur-3xl"></div>
@@ -7,19 +7,6 @@
     </div>
     
     <div class="relative z-10 w-full">
-      <div 
-        ref="headerRef"
-        class="text-center mb-12 sm:mb-16 md:mb-20 px-4 sm:px-6"
-      >
-        <h2 class="text-2xl sm:text-3xl md:text-[36px] text-primary-dark mb-3 sm:mb-4 font-normal tracking-wide" style="font-family: 'Italianno', cursive; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-          Menu
-        </h2>
-        <div class="divider-line h-[1px] bg-gradient-to-r from-transparent via-primary-red/50 to-transparent w-full max-w-[250px] sm:max-w-[300px] mx-auto mb-4 sm:mb-6"></div>
-        <p class="text-sm sm:text-base md:text-[16px] text-primary-dark/80 leading-relaxed max-w-[1280px] mx-auto tracking-wide font-light px-2">
-          Discover our authentic Italian cuisine featuring traditional wood-fired pizzas, handcrafted pastas, and classic Italian specialties. Each dish is prepared with the finest ingredients and time-honored techniques.
-        </p>
-      </div>
-
       <!-- Menu Book Layout -->
       <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <!-- Decorative Frame Container -->
@@ -50,57 +37,43 @@
                 <p class="text-base md:text-lg text-primary-dark/70 italic tracking-wide">Authentic Italian Cuisine</p>
               </div>
 
-              <!-- Contact Information -->
-              <div class="space-y-8 flex-1">
-                <div>
-                  <h4 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Location</h4>
-                  <p class="text-base md:text-lg text-primary-dark leading-relaxed">
-                    Quintstraße 123<br>
-                    54292 Trier-Quint<br>
-                    Germany
-                  </p>
-                </div>
-
-                <div>
-                  <h4 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Contact</h4>
-                  <div class="space-y-3">
-                    <p class="text-base md:text-lg text-primary-dark">
-                      <a href="tel:+496512345678" class="hover:text-primary-red transition-colors">
-                        +49 651 123 456 78
-                      </a>
-                    </p>
-                    <p class="text-base md:text-lg text-primary-dark">
-                      <a href="mailto:info@pizzeriaadria.de" class="hover:text-primary-red transition-colors">
-                        info@pizzeriaadria.de
-                      </a>
-                    </p>
+              <!-- Quote Section -->
+              <div class="flex-1 flex items-center justify-center py-8">
+                <div class="space-y-8 md:space-y-10 w-full">
+                  <!-- Quote 1 -->
+                  <div class="text-center">
+                    <div class="flex items-center justify-center mb-4">
+                      <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                      </svg>
+                    </div>
+                    <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
+                      "You don't need a silver fork to eat good food."
+                    </blockquote>
                   </div>
-                </div>
 
-                <div>
-                  <h4 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Website</h4>
-                  <p class="text-base md:text-lg text-primary-dark">
-                    <a href="http://www.pizzeriaadria-trier.de" target="_blank" rel="noopener noreferrer" class="hover:text-primary-red transition-colors">
-                      www.pizzeriaadria-trier.de
-                    </a>
-                  </p>
-                </div>
+                  <!-- Quote 2 -->
+                  <div class="text-center">
+                    <div class="flex items-center justify-center mb-4">
+                      <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                      </svg>
+                    </div>
+                    <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
+                      "Good food is the foundation of genuine happiness."
+                    </blockquote>
+                  </div>
 
-                <div>
-                  <h4 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Opening Hours</h4>
-                  <div class="space-y-2.5 text-base md:text-lg text-primary-dark">
-                    <div class="flex justify-between items-center">
-                      <span class="font-light">Monday – Thursday</span>
-                      <span class="font-medium">11:30 – 22:00</span>
+                  <!-- Quote 3 -->
+                  <div class="text-center">
+                    <div class="flex items-center justify-center mb-4">
+                      <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                      </svg>
                     </div>
-                    <div class="flex justify-between items-center">
-                      <span class="font-light">Friday – Saturday</span>
-                      <span class="font-medium">11:30 – 23:00</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="font-light">Sunday</span>
-                      <span class="font-medium">12:00 – 22:00</span>
-                    </div>
+                    <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
+                      "One cannot think well, love well, sleep well, if one has not dined well."
+                    </blockquote>
                   </div>
                 </div>
               </div>
@@ -191,7 +164,6 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
-const headerRef = ref<HTMLElement | null>(null)
 const menuBookRef = ref<HTMLElement | null>(null)
 
 const pdfMenus = [
@@ -211,65 +183,6 @@ const menuCategories = [
 ]
 
 onMounted(() => {
-  // Animate header with same style as StoryDivider
-  if (headerRef.value) {
-    const title = headerRef.value.querySelector('h2')
-    const line = headerRef.value.querySelector('.divider-line')
-    const text = headerRef.value.querySelector('p')
-    
-    if (title && line && text) {
-      // Title slides in from left
-      gsap.fromTo(title,
-        { opacity: 0, x: -80 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: headerRef.value,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      )
-      
-      // Line expands from center
-      gsap.fromTo(line,
-        { opacity: 0, scaleX: 0 },
-        {
-          opacity: 1,
-          scaleX: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          delay: 0.3,
-          scrollTrigger: {
-            trigger: headerRef.value,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      )
-      
-      // Text slides in from right
-      gsap.fromTo(text,
-        { opacity: 0, x: 80 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1,
-          ease: 'power2.out',
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: headerRef.value,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      )
-    }
-  }
-
   // Animate menu book
   if (menuBookRef.value) {
     gsap.fromTo(menuBookRef.value,
