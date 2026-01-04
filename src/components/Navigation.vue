@@ -156,13 +156,13 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: 'home', label: 'Home', href: '#home' },
-  { id: 'about', label: 'About Us', href: '#about' },
-  { id: 'news', label: 'News', href: '#news' },
-  { id: 'menu', label: 'Menu', href: '#menu' },
-  { id: 'reservations', label: 'Reservation & Delivery', href: '#reservations' },
-  { id: 'testimonials', label: 'Testimonials', href: '#testimonials' },
-  { id: 'location', label: 'Contact Us', href: '#location' },
+  { id: 'home', label: 'Startseite', href: '#home' },
+  { id: 'about', label: 'Über Uns', href: '#about' },
+  { id: 'news', label: 'Neuigkeiten', href: '#news' },
+  { id: 'menu', label: 'Speisekarte', href: '#menu' },
+  { id: 'reservations', label: 'Reservierung & Lieferung', href: '#reservations' },
+  { id: 'testimonials', label: 'Bewertungen', href: '#testimonials' },
+  { id: 'location', label: 'Kontakt', href: '#location' },
 ]
 
 const navRef = ref<HTMLElement | null>(null)

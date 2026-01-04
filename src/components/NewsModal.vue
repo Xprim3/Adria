@@ -14,7 +14,7 @@
         <!-- Header with Close Button -->
         <div class="sticky top-0 z-30 bg-gradient-to-r from-primary-red to-primary-banner px-6 md:px-8 py-5 md:py-6 flex items-center justify-between border-b border-primary-red/20">
           <h2 class="text-2xl md:text-3xl font-restaurant font-normal text-white" style="font-family: 'Italianno', cursive;">
-            News & Updates
+            Neuigkeiten & Updates
           </h2>
           <button
             @click="closeModal"
@@ -61,7 +61,7 @@
 
             <!-- Empty State -->
             <div v-if="newsItems.length === 0" class="text-center py-12">
-              <p class="text-base text-primary-dark/60 italic">No news or updates at the moment. Check back soon!</p>
+              <p class="text-base text-primary-dark/60 italic">Derzeit keine Neuigkeiten oder Updates. Schauen Sie bald wieder vorbei!</p>
             </div>
           </div>
         </div>
@@ -71,9 +71,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 
 interface NewsItem {
+  id?: number
   type: 'event' | 'news' | 'update' | 'announcement'
   title: string
   content: string
@@ -88,32 +89,35 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const newsItems = ref<NewsItem[]>([
-  {
-    type: 'event',
-    title: 'New Year\'s Eve Special Menu',
-    content: 'Join us for a special 4-course menu on New Year\'s Eve. Reservations are required and can be made by calling us or sending an email.',
-    date: '2024-12-31'
-  },
-  {
-    type: 'announcement',
-    title: 'Holiday Hours',
-    content: 'We will be closed on December 24th and 25th for Christmas. We will reopen on December 26th with normal operating hours.',
-    date: '2024-12-24'
-  },
-  {
-    type: 'update',
-    title: 'Weekend Family Pizza Deal',
-    content: 'Every weekend, enjoy our special family deal: 2 large pizzas + 2 drinks for only €29.99. Available every Friday, Saturday, and Sunday.',
-    date: '2024-12-21'
-  },
-  {
-    type: 'news',
-    title: 'New Seasonal Menu Items',
-    content: 'We\'ve added new seasonal dishes to our menu featuring fresh, locally sourced ingredients. Ask your server about our chef\'s specials!',
-    date: '2024-12-15'
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+const newsItems = ref<NewsItem[]>([])
+const loading = ref(false)
+
+const loadNews = async () => {
+  loading.value = true
+  try {
+    const response = await fetch(`${API_URL}/news`)
+    if (response.ok) {
+      newsItems.value = await response.json()
+    }
+  } catch (error) {
+    console.error('Error loading news:', error)
+    // Fallback to empty array if API fails
+    newsItems.value = []
+  } finally {
+    loading.value = false
   }
-])
+}
+
+watch(() => props.isOpen, (isOpen) => {
+  if (isOpen) {
+    loadNews()
+  }
+})
+
+onMounted(() => {
+  loadNews()
+})
 
 const closeModal = () => {
   emit('close')
@@ -131,7 +135,7 @@ const getBadgeClass = (type: string) => {
 
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', { 
+  return date.toLocaleDateString('de-DE', { 
     weekday: 'long',
     year: 'numeric', 
     month: 'long', 

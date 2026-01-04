@@ -34,7 +34,7 @@
                   <div class="w-2 h-2 rounded-full bg-primary-red/60"></div>
                   <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
                 </div>
-                <p class="text-base md:text-lg text-primary-dark/70 italic tracking-wide">Authentic Italian Cuisine</p>
+                <p class="text-base md:text-lg text-primary-dark/70 italic tracking-wide">Authentische italienische Küche</p>
               </div>
 
               <!-- Quote Section -->
@@ -48,7 +48,7 @@
                       </svg>
                     </div>
                     <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
-                      "You don't need a silver fork to eat good food."
+                      "Man braucht keine silberne Gabel, um gutes Essen zu genießen."
                     </blockquote>
                   </div>
 
@@ -60,7 +60,7 @@
                       </svg>
                     </div>
                     <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
-                      "Good food is the foundation of genuine happiness."
+                      "Gutes Essen ist die Grundlage echter Zufriedenheit."
                     </blockquote>
                   </div>
 
@@ -72,7 +72,7 @@
                       </svg>
                     </div>
                     <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
-                      "One cannot think well, love well, sleep well, if one has not dined well."
+                      "Man kann nicht gut denken, lieben und schlafen, wenn man nicht gut gegessen hat."
                     </blockquote>
                   </div>
                 </div>
@@ -80,7 +80,7 @@
 
               <!-- Decorative Footer -->
               <div class="mt-10 pt-8 border-t border-primary-dark/10">
-                <p class="text-xs text-primary-dark/40 text-center tracking-wider uppercase">Established 2003</p>
+                <p class="text-xs text-primary-dark/40 text-center tracking-wider uppercase">Seit 2003</p>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@
                   <div class="w-2 h-2 rounded-full bg-primary-red/60"></div>
                   <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
                 </div>
-                <p class="text-base md:text-lg text-primary-dark/70">Our Complete Selection</p>
+                <p class="text-base md:text-lg text-primary-dark/70">Unsere komplette Auswahl</p>
               </div>
 
               <!-- Clean Menu Categories List -->
@@ -133,7 +133,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
-                  <span>View Full Menu</span>
+                  <span>Vollständige Speisekarte ansehen</span>
                 </a>
                 <a
                   :href="pdfMenus[0].url"
@@ -143,7 +143,7 @@
                   <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
-                  <span>Download PDF</span>
+                  <span>PDF herunterladen</span>
                 </a>
               </div>
             </div>

@@ -17,31 +17,31 @@
               <h3 class="text-2xl md:text-3xl font-restaurant font-normal mb-2" style="font-family: 'Italianno', cursive;">
                 Pizzeria Adria
               </h3>
-              <p class="text-xs text-white/60">Established 2003</p>
+              <p class="text-xs text-white/60">Seit 2003</p>
             </div>
 
             <!-- Quick Links -->
             <div>
-              <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Quick Links</h4>
+              <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Schnelllinks</h4>
               <ul class="space-y-1.5">
                 <li>
                   <a href="#about" @click.prevent="scrollToSection('about')" class="text-xs md:text-sm text-white/70 hover:text-primary-red transition-colors duration-300">
-                    About Us
+                    Über Uns
                   </a>
                 </li>
                 <li>
                   <a href="#menu" @click.prevent="scrollToSection('menu')" class="text-xs md:text-sm text-white/70 hover:text-primary-red transition-colors duration-300">
-                    Menu
+                    Speisekarte
                   </a>
                 </li>
                 <li>
                   <a href="#reservations" @click.prevent="scrollToSection('reservations')" class="text-xs md:text-sm text-white/70 hover:text-primary-red transition-colors duration-300">
-                    Reservations
+                    Reservierungen
                   </a>
                 </li>
                 <li>
                   <a href="#location" @click.prevent="scrollToSection('location')" class="text-xs md:text-sm text-white/70 hover:text-primary-red transition-colors duration-300">
-                    Location
+                    Standort
                   </a>
                 </li>
               </ul>
@@ -49,7 +49,7 @@
 
             <!-- Contact -->
             <div>
-              <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Contact</h4>
+              <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Kontakt</h4>
               <div class="space-y-1.5 text-xs md:text-sm text-white/70">
                 <p>Koblenzer Str. 1F<br>54293 Trier</p>
                 <a href="tel:+496519664588" class="hover:text-primary-red transition-colors duration-300 block">
@@ -63,7 +63,7 @@
 
             <!-- Social Media -->
             <div>
-              <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Follow Us</h4>
+              <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Folgen Sie uns</h4>
               <div class="flex items-center gap-3">
                 <a
                   href="https://www.facebook.com"
@@ -107,7 +107,7 @@
           <div class="pt-6 border-t border-white/10">
             <div class="flex flex-col md:flex-row items-center justify-between gap-2">
               <p class="text-xs text-white/60 text-center md:text-left">
-                © {{ currentYear }} Pizzeria Adria. All rights reserved.
+                © {{ currentYear }} Pizzeria Adria. Alle Rechte vorbehalten.
               </p>
             </div>
           </div>

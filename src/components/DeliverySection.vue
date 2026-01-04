@@ -11,7 +11,7 @@
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
-              Delivery
+              Lieferung
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-primary-red/40"></div>
@@ -19,7 +19,7 @@
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
             <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
-              Enjoy our authentic Italian cuisine in the comfort of your home. We partner with Lieferando to bring our delicious pizzas, pastas, and specialties directly to your door.
+              Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.
             </p>
           </div>
 
@@ -27,7 +27,7 @@
           <div class="space-y-5 md:space-y-6">
             <!-- How to Order -->
             <div>
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">How to Order</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Wie Sie bestellen</h3>
               <div class="space-y-4">
                 <!-- Order by Phone -->
                 <div class="flex items-start gap-4">
@@ -37,12 +37,12 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Order by Phone</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Per Telefon bestellen</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Call us directly to place your order for delivery or pickup
+                      Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben
                     </p>
-                    <a href="tel:+496512345678" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
-                      +49 651 123 456 78
+                    <a href="tel:+496519664588" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                      +49 651 966 45 88
                     </a>
                   </div>
                 </div>
@@ -55,12 +55,12 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Our Delivery Service</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Unser Lieferservice</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Fast and reliable delivery directly from our kitchen to your door
+                      Schnelle und zuverlässige Lieferung direkt von unserer Küche an Ihre Haustür
                     </p>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70">
-                      We deliver fresh, hot meals prepared with care and delivered with speed
+                      Wir liefern frische, heiße Mahlzeiten, die mit Sorgfalt zubereitet und schnell geliefert werden
                     </p>
                   </div>
                 </div>
@@ -69,33 +69,33 @@
 
             <!-- Delivery Details -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Delivery Information</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Lieferinformationen</h3>
               <div class="space-y-3 text-sm md:text-base text-primary-dark/70">
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>We deliver directly from our restaurant to your door</p>
+                  <p>Wir liefern direkt von unserem Restaurant an Ihre Haustür</p>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>We primarily serve the region close to our restaurant - please call us to confirm if we deliver to your address</p>
+                  <p>Wir beliefern hauptsächlich die Region in der Nähe unseres Restaurants - bitte rufen Sie uns an, um zu bestätigen, ob wir Ihre Adresse beliefern</p>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Multiple payment options: cash on delivery, card, or online payment</p>
+                  <p>Mehrere Zahlungsoptionen: Barzahlung bei Lieferung, Karte oder Online-Zahlung</p>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Minimum order value may apply - delivery times vary based on distance and order volume</p>
+                  <p>Mindestbestellwert kann gelten - Lieferzeiten variieren je nach Entfernung und Bestellvolumen</p>
                 </div>
               </div>
             </div>
 
             <!-- Alternative: Lieferando -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Alternative Ordering Option</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Alternative Bestelloption</h3>
               <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
                 <p class="text-sm md:text-base text-primary-dark/70 mb-3">
-                  You can also order through our partner <strong class="text-primary-dark">Lieferando</strong> for online ordering convenience.
+                  Sie können auch über unseren Partner <strong class="text-primary-dark">Lieferando</strong> bestellen, für bequemes Online-Bestellen.
                 </p>
                 <a 
                   href="https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier" 
@@ -103,7 +103,7 @@
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 text-sm md:text-base text-primary-red hover:text-primary-banner transition-colors font-medium"
                 >
-                  <span>Order on Lieferando</span>
+                  <span>Auf Lieferando bestellen</span>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
@@ -127,6 +127,7 @@
               :src="images[0].src"
               :alt="images[0].alt"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -137,6 +138,7 @@
               :src="images[1].src"
               :alt="images[1].alt"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -147,6 +149,7 @@
               :src="images[2].src"
               :alt="images[2].alt"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -158,6 +161,7 @@
             :src="images[3].src"
             :alt="images[3].alt"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
           />
         </div>
       </div>
@@ -179,20 +183,20 @@ const contentRef = ref<HTMLElement | null>(null)
 
 const images = [
   {
-    src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    alt: 'Restaurant Interior'
+    src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    alt: 'Essenslieferung in Trier - Pizzeria Adria Lieferservice'
   },
   {
-    src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-    alt: 'Dining Table'
+    src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+    alt: 'Essensverpackung für Lieferung - Pizzeria Adria Trier'
   },
   {
-    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    alt: 'Restaurant Ambiance'
+    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    alt: 'Schnelle Essenslieferung in Trier - Pizzeria Adria'
   },
   {
-    src: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-    alt: 'Italian Cuisine'
+    src: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+    alt: 'Frische italienische Küche zum Mitnehmen - Pizzeria Adria Trier'
   }
 ]
 

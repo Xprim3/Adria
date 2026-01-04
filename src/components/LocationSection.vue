@@ -35,7 +35,7 @@
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
-              Find Us
+              Finden Sie uns
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-primary-red/40"></div>
@@ -43,7 +43,7 @@
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
             <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
-              Visit us at our restaurant in Trier-Quint. We're conveniently located and easily accessible by car or public transport.
+              Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.
             </p>
           </div>
 
@@ -51,7 +51,7 @@
           <div class="space-y-5 md:space-y-6">
             <!-- Address -->
             <div>
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Address</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Adresse</h3>
               <div class="flex items-start gap-4">
                 <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-red/10 flex items-center justify-center">
                   <svg class="w-4 h-4 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium"
                   >
-                    <span>Get Directions</span>
+                    <span>Route anzeigen</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -82,7 +82,7 @@
 
             <!-- Contact Information -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Contact</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Kontakt</h3>
               <div class="space-y-4">
                 <!-- Phone -->
                 <div class="flex items-start gap-4">
@@ -92,7 +92,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-1">Phone</p>
+                    <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-1">Telefon</p>
                     <a href="tel:+496519664588" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
                       +49 651 966 45 88
                     </a>
@@ -107,7 +107,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-1">Email</p>
+                    <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-1">E-Mail</p>
                     <a href="mailto:info@pizzeriaadria.de" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
                       info@pizzeriaadria.de
                     </a>
@@ -118,20 +118,20 @@
 
             <!-- Opening Hours -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Opening Hours</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Öffnungszeiten</h3>
               <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
                 <div class="space-y-2 text-sm md:text-base text-primary-dark">
                   <div class="flex justify-between items-center">
-                    <span class="font-light">Monday – Thursday</span>
-                    <span class="font-medium">11:30 AM – 10:00 PM</span>
+                    <span class="font-light">Montag – Donnerstag</span>
+                    <span class="font-medium">11:30 – 22:00 Uhr</span>
                   </div>
                   <div class="flex justify-between items-center">
-                    <span class="font-light">Friday – Saturday</span>
-                    <span class="font-medium">11:30 AM – 11:00 PM</span>
+                    <span class="font-light">Freitag – Samstag</span>
+                    <span class="font-medium">11:30 – 23:00 Uhr</span>
                   </div>
                   <div class="flex justify-between items-center">
-                    <span class="font-light">Sunday</span>
-                    <span class="font-medium">12:00 PM – 10:00 PM</span>
+                    <span class="font-light">Sonntag</span>
+                    <span class="font-medium">12:00 – 22:00 Uhr</span>
                   </div>
                 </div>
               </div>

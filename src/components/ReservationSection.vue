@@ -15,6 +15,7 @@
               :src="images[0].src"
               :alt="images[0].alt"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -25,6 +26,7 @@
               :src="images[1].src"
               :alt="images[1].alt"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -35,6 +37,7 @@
               :src="images[2].src"
               :alt="images[2].alt"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -46,6 +49,7 @@
             :src="images[3].src"
             :alt="images[3].alt"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
           />
         </div>
       </div>
@@ -59,7 +63,7 @@
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
-              Reservations
+              Reservierungen
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-primary-red/40"></div>
@@ -67,7 +71,7 @@
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
             <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
-              We welcome reservations for parties of all sizes. Whether you're planning a romantic dinner for two or a celebration with family and friends, we're here to make your dining experience special.
+              Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.
             </p>
           </div>
 
@@ -75,7 +79,7 @@
           <div class="space-y-5 md:space-y-6">
             <!-- How to Reserve -->
             <div>
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-3 md:mb-4 font-semibold">How to Make a Reservation</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-3 md:mb-4 font-semibold">Wie Sie eine Reservierung vornehmen</h3>
               <div class="space-y-3 md:space-y-4">
                 <!-- Phone -->
                 <div class="flex items-start gap-4">
@@ -85,12 +89,12 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">By Phone</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Per Telefon</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Call us directly during our opening hours
+                      Rufen Sie uns direkt während unserer Öffnungszeiten an
                     </p>
-                    <a href="tel:+496512345678" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
-                      +49 651 123 456 78
+                    <a href="tel:+496519664588" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                      +49 651 966 45 88
                     </a>
                   </div>
                 </div>
@@ -103,9 +107,9 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">By Email</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Per E-Mail</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Send us an email with your preferred date and time
+                      Senden Sie uns eine E-Mail mit Ihrem bevorzugten Datum und Ihrer Uhrzeit
                     </p>
                     <a href="mailto:reservations@pizzeriaadria.de" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
                       reservations@pizzeriaadria.de
@@ -125,17 +129,17 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Location</h4>
+                  <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Standort</h4>
                   <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                    Quintstraße 123, 54292 Trier-Quint, Germany
+                    Koblenzer Str. 1F, 54293 Trier, Deutschland
                   </p>
                   <a 
-                    href="https://maps.google.com/?q=Quintstraße+123,+54292+Trier-Quint,+Germany" 
+                    href="https://maps.app.goo.gl/HLMABPcUAv37hV1H7" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium"
                   >
-                    Get Directions
+                    Route anzeigen
                   </a>
                 </div>
               </div>
@@ -143,42 +147,42 @@
 
             <!-- Reservation Details -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Reservation Details</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Reservierungsdetails</h3>
               <div class="space-y-3 text-sm md:text-base text-primary-dark/70">
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Reservations are recommended, especially for weekends and special occasions</p>
+                  <p>Reservierungen werden empfohlen, insbesondere für Wochenenden und besondere Anlässe</p>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Please inform us of any dietary restrictions or special requests when booking</p>
+                  <p>Bitte informieren Sie uns bei der Buchung über diätetische Einschränkungen oder besondere Wünsche</p>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Large party reservations (8+ guests) should be made at least 48 hours in advance</p>
+                  <p>Reservierungen für größere Gruppen (8+ Gäste) sollten mindestens 48 Stunden im Voraus vorgenommen werden</p>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>We accommodate private events and celebrations - contact us for special arrangements</p>
+                  <p>Wir richten private Veranstaltungen und Feiern aus - kontaktieren Sie uns für spezielle Arrangements</p>
                 </div>
               </div>
             </div>
 
             <!-- Opening Hours Reminder -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Best Times to Call</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Beste Anrufzeiten</h3>
               <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
                 <p class="text-sm md:text-base text-primary-dark/70 mb-3">
-                  For the best availability, we recommend calling during our quieter hours:
+                  Für die beste Verfügbarkeit empfehlen wir, während unserer ruhigeren Stunden anzurufen:
                 </p>
                 <div class="space-y-2 text-sm md:text-base text-primary-dark">
                   <div class="flex justify-between items-center">
-                    <span class="font-light">Monday – Thursday</span>
-                    <span class="font-medium">2:00 PM – 5:00 PM</span>
+                    <span class="font-light">Montag – Donnerstag</span>
+                    <span class="font-medium">14:00 – 17:00 Uhr</span>
                   </div>
                   <div class="flex justify-between items-center">
-                    <span class="font-light">Friday – Sunday</span>
-                    <span class="font-medium">2:00 PM – 4:00 PM</span>
+                    <span class="font-light">Freitag – Sonntag</span>
+                    <span class="font-medium">14:00 – 16:00 Uhr</span>
                   </div>
                 </div>
               </div>
@@ -205,19 +209,19 @@ const contentRef = ref<HTMLElement | null>(null)
 const images = [
   {
     src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    alt: 'Restaurant Interior'
+    alt: 'Pizzeria Adria Restaurant Innenraum - Reservierungen in Trier'
   },
   {
     src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-    alt: 'Dining Table'
+    alt: 'Gedeckter Tisch in Pizzeria Adria Trier - Reservierung für romantisches Dinner'
   },
   {
     src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    alt: 'Restaurant Ambiance'
+    alt: 'Gemütliche Restaurant-Atmosphäre in Pizzeria Adria Trier'
   },
   {
     src: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-    alt: 'Italian Cuisine'
+    alt: 'Italienische Küche in Pizzeria Adria Trier - Authentische Gerichte'
   }
 ]
 

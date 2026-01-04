@@ -5,7 +5,7 @@
       <!-- Slide Items -->
       <div
         v-for="(slide, index) in slides"
-        :key="index"
+        :key="`slide-${index}-${slide.image}`"
         :ref="el => { if (el) slideRefs[index] = el as HTMLElement }"
         class="absolute inset-0 transition-opacity duration-1000"
         :class="currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 z-0'"
@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import gsap from 'gsap'
 
 interface Slide {
@@ -74,7 +74,10 @@ interface Slide {
   subtitle: string
 }
 
-const slides: Slide[] = [
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
+// Default fallback slides
+const defaultSlides: Slide[] = [
   {
     image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     title: 'Willkommen bei Pizzeria Adria',
@@ -92,11 +95,35 @@ const slides: Slide[] = [
   }
 ]
 
+const slides = ref<Slide[]>(defaultSlides)
 const sliderRef = ref<HTMLElement | null>(null)
 const slideRefs = ref<(HTMLElement | null)[]>([])
 const contentRefs = ref<(HTMLElement | null)[]>([])
 const currentSlide = ref(0)
 let slideInterval: number | null = null
+
+// Load hero slides from API
+const loadHeroSlides = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/hero`)
+    const data = await response.json()
+    
+    if (data.slides?.value) {
+      const parsedSlides = JSON.parse(data.slides.value)
+      // Filter out empty slides and validate
+      const validSlides = parsedSlides.filter((slide: Slide) => 
+        slide.image && slide.title && slide.subtitle
+      )
+      
+      if (validSlides.length > 0) {
+        slides.value = validSlides
+      }
+    }
+  } catch (error) {
+    console.error('Error loading hero slides:', error)
+    // Keep default slides on error
+  }
+}
 
 const goToSlide = (index: number) => {
   if (index === currentSlide.value) return
@@ -138,11 +165,27 @@ const goToSlide = (index: number) => {
 }
 
 const startSlideShow = () => {
+  if (slides.value.length === 0) return
+  
+  if (slideInterval) {
+    clearInterval(slideInterval)
+  }
+  
   slideInterval = window.setInterval(() => {
-    const nextSlide = (currentSlide.value + 1) % slides.length
-    goToSlide(nextSlide)
+    if (slides.value.length > 0) {
+      const nextSlide = (currentSlide.value + 1) % slides.value.length
+      goToSlide(nextSlide)
+    }
   }, 5000) // Change slide every 5 seconds
 }
+
+// Watch for slides changes and restart slideshow
+watch(() => slides.value.length, () => {
+  if (slides.value.length > 0 && currentSlide.value >= slides.value.length) {
+    currentSlide.value = 0
+  }
+  startSlideShow()
+})
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId)
@@ -158,9 +201,12 @@ const scrollToSection = (sectionId: string) => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // Load slides from API
+  await loadHeroSlides()
+  
   // Animate first slide content
-  if (contentRefs.value[0]) {
+  if (slides.value.length > 0 && contentRefs.value[0]) {
     gsap.fromTo(contentRefs.value[0],
       { opacity: 0, y: 30 },
       {

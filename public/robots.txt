@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.pizzeriaadria.de/sitemap.xml
+
+# Disallow admin areas (when implemented)
+Disallow: /admin/
+Disallow: /api/
+

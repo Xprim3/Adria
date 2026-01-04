@@ -13,6 +13,12 @@ export default defineConfig({
   server: {
     host: true, // Allow access from network
     port: 5173, // Default Vite port
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      }
+    }
   }
 })
 

@@ -22,11 +22,11 @@
         </h2>
         
         <p class="text-base sm:text-lg md:text-xl text-primary-dark/80 leading-relaxed max-w-2xl mx-auto mb-6 md:mb-8">
-          Thank you for being part of our journey. Your support and patronage mean the world to us. We look forward to welcoming you to Pizzeria Adria and sharing the authentic flavors of Italy with you and your loved ones.
+          Vielen Dank, dass Sie Teil unserer Reise sind. Ihre Unterstützung und Ihre Schirmherrschaft bedeuten uns die Welt. Wir freuen uns darauf, Sie in der Pizzeria Adria willkommen zu heißen und die authentischen Aromen Italiens mit Ihnen und Ihren Liebsten zu teilen.
         </p>
         
         <p class="text-sm sm:text-base md:text-lg text-primary-dark/70 leading-relaxed max-w-xl mx-auto italic" style="font-family: 'Playfair Display', serif;">
-          "Food is our common ground, a universal experience."
+          "Essen ist unser gemeinsamer Nenner, eine universelle Erfahrung."
         </p>
         
         <div class="flex items-center justify-center gap-3 mt-6 md:mt-8">

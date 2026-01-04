@@ -7,11 +7,11 @@
     <div class="container mx-auto px-4 sm:px-6">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl sm:text-4xl md:text-5xl text-primary-dark mb-4 md:mb-5 font-normal tracking-wide" style="font-family: 'Italianno', cursive; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-          Reservations & Delivery
+          Reservierung & Lieferung
         </h2>
         <div class="divider-line h-[1px] bg-gradient-to-r from-transparent via-primary-red/50 to-transparent w-full max-w-[280px] sm:max-w-[320px] mx-auto mb-5 md:mb-6"></div>
         <p class="text-sm sm:text-base md:text-lg text-primary-dark/80 leading-relaxed max-w-3xl mx-auto tracking-wide font-light px-2">
-          Reserve your table for an unforgettable dining experience or enjoy our authentic Italian cuisine delivered to your door. We're here to bring the taste of Italy to you, whether you dine with us or in the comfort of your home.
+          Reservieren Sie Ihren Tisch für ein unvergessliches kulinarisches Erlebnis oder genießen Sie unsere authentische italienische Küche direkt an Ihrer Haustür. Wir bringen Ihnen den Geschmack Italiens, ob Sie bei uns speisen oder in den eigenen vier Wänden.
         </p>
       </div>
     </div>
