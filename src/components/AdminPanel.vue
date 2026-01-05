@@ -1299,8 +1299,8 @@ const menuContent = ref({
 const reservationContent = ref({
   heading: 'Reservierungen',
   description: 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.',
-  phone: '+49 651 966 45 88',
-  email: 'reservations@pizzeriaadria.de',
+  phone: '0651 966 45 88',
+  email: 'pizzeria@adriatrier.de',
   phoneTitle: 'Per Telefon',
   phoneDescription: 'Rufen Sie uns direkt während unserer Öffnungszeiten an',
   emailTitle: 'Per E-Mail',
@@ -1332,7 +1332,7 @@ const reservationContent = ref({
 const deliveryContent = ref({
   heading: 'Lieferung',
   description: 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.',
-  phone: '+49 651 966 45 88',
+  phone: '0651 966 45 88',
   phoneOrderTitle: 'Per Telefon bestellen',
   phoneOrderDescription: 'Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben',
   deliveryServiceTitle: 'Unser Lieferservice',
@@ -1363,9 +1363,8 @@ const locationContent = ref({
   phone: '+49 651 966 45 88',
   email: 'info@pizzeriaadria.de',
   openingHours: [
-    { days: 'Montag – Donnerstag', time: '11:30 – 22:00 Uhr' },
-    { days: 'Freitag – Samstag', time: '11:30 – 23:00 Uhr' },
-    { days: 'Sonntag', time: '12:00 – 22:00 Uhr' }
+    { days: 'Montag', time: 'Ruhetag' },
+    { days: 'Dienstag – Sonntag', time: '11:00 – 14:00 Uhr und 17:00 – 22:00 Uhr' }
   ]
 })
 
@@ -1642,8 +1641,8 @@ const loadSection = async (section: string) => {
         // Default values (same as frontend)
         const defaultHeading = 'Reservierungen'
         const defaultDescription = 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.'
-        const defaultPhone = '+49 651 966 45 88'
-        const defaultEmail = 'reservations@pizzeriaadria.de'
+        const defaultPhone = '0651 966 45 88'
+        const defaultEmail = 'pizzeria@adriatrier.de'
         const defaultPhoneTitle = 'Per Telefon'
         const defaultPhoneDescription = 'Rufen Sie uns direkt während unserer Öffnungszeiten an'
         const defaultEmailTitle = 'Per E-Mail'
@@ -1739,7 +1738,7 @@ const loadSection = async (section: string) => {
         // Default values (same as frontend)
         const defaultDeliveryHeading = 'Lieferung'
         const defaultDeliveryDescription = 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.'
-        const defaultDeliveryPhone = '+49 651 966 45 88'
+        const defaultDeliveryPhone = '0651 966 45 88'
         const defaultPhoneOrderTitle = 'Per Telefon bestellen'
         const defaultPhoneOrderDescription = 'Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben'
         const defaultDeliveryServiceTitle = 'Unser Lieferservice'
@@ -1818,9 +1817,8 @@ const loadSection = async (section: string) => {
         const defaultLocationPhone = '+49 651 966 45 88'
         const defaultLocationEmail = 'info@pizzeriaadria.de'
         const defaultOpeningHours = [
-          { days: 'Montag – Donnerstag', time: '11:30 – 22:00 Uhr' },
-          { days: 'Freitag – Samstag', time: '11:30 – 23:00 Uhr' },
-          { days: 'Sonntag', time: '12:00 – 22:00 Uhr' }
+          { days: 'Montag', time: 'Ruhetag' },
+          { days: 'Dienstag – Sonntag', time: '11:00 – 14:00 Uhr und 17:00 – 22:00 Uhr' }
         ]
         
         // Load opening hours - use database value if exists, otherwise default

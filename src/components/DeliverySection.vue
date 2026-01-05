@@ -41,8 +41,8 @@
                     <p class="text-sm sm:text-base text-primary-dark/75 mb-3 leading-relaxed">
                       {{ phoneOrderDescription }}
                     </p>
-                    <a :href="`tel:${phone || '+496519664588'}`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation">
-                      {{ phone || '+49 651 966 45 88' }}
+                    <a :href="`tel:+496519664588`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation">
+                      {{ phone || '0651 966 45 88' }}
                     </a>
                   </div>
                 </div>
@@ -197,7 +197,7 @@ const defaultImages = [
 
 const heading = ref('Lieferung')
 const description = ref('Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.')
-const phone = ref('+49 651 966 45 88')
+const phone = ref('0651 966 45 88')
 const phoneOrderTitle = ref('Per Telefon bestellen')
 const phoneOrderDescription = ref('Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben')
 const deliveryServiceTitle = ref('Unser Lieferservice')

@@ -128,16 +128,12 @@
                   <!-- Fallback if no opening hours -->
                   <template v-if="!openingHours || openingHours.length === 0">
                     <div class="flex justify-between items-center">
-                      <span class="font-light">Montag – Donnerstag</span>
-                      <span class="font-medium">11:30 – 22:00 Uhr</span>
+                      <span class="font-light">Montag</span>
+                      <span class="font-medium">Ruhetag</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span class="font-light">Freitag – Samstag</span>
-                      <span class="font-medium">11:30 – 23:00 Uhr</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="font-light">Sonntag</span>
-                      <span class="font-medium">12:00 – 22:00 Uhr</span>
+                      <span class="font-light">Dienstag – Sonntag</span>
+                      <span class="font-medium">11:00 – 14:00 Uhr und 17:00 – 22:00 Uhr</span>
                     </div>
                   </template>
                 </div>
@@ -167,9 +163,8 @@ const mapRef = ref<HTMLElement | null>(null)
 // Default values (fallback)
 const defaultAddress = 'Koblenzer Str. 1F\n54293 Trier\nGermany'
 const defaultOpeningHours = [
-  { days: 'Montag – Donnerstag', time: '11:30 – 22:00 Uhr' },
-  { days: 'Freitag – Samstag', time: '11:30 – 23:00 Uhr' },
-  { days: 'Sonntag', time: '12:00 – 22:00 Uhr' }
+  { days: 'Montag', time: 'Ruhetag' },
+  { days: 'Dienstag – Sonntag', time: '11:00 – 14:00 Uhr und 17:00 – 22:00 Uhr' }
 ]
 
 const heading = ref('Finden Sie uns')

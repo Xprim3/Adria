@@ -93,8 +93,8 @@
                     <p class="text-sm sm:text-base text-primary-dark/75 mb-3 leading-relaxed">
                       {{ phoneDescription }}
                     </p>
-                    <a :href="`tel:${phone || '+496519664588'}`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation">
-                      {{ phone || '+49 651 966 45 88' }}
+                    <a :href="`tel:+496519664588`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation">
+                      {{ phone || '0651 966 45 88' }}
                     </a>
                   </div>
                 </div>
@@ -111,8 +111,8 @@
                     <p class="text-sm sm:text-base text-primary-dark/75 mb-3 leading-relaxed">
                       {{ emailDescription }}
                     </p>
-                    <a :href="`mailto:${email || 'reservations@pizzeriaadria.de'}`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation break-all">
-                      {{ email || 'reservations@pizzeriaadria.de' }}
+                    <a :href="`mailto:${email || 'pizzeria@adriatrier.de'}`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation break-all">
+                      {{ email || 'pizzeria@adriatrier.de' }}
                     </a>
                   </div>
                 </div>
@@ -222,8 +222,8 @@ const defaultImages = [
 
 const heading = ref('Reservierungen')
 const description = ref('Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.')
-const phone = ref('+49 651 966 45 88')
-const email = ref('reservations@pizzeriaadria.de')
+const phone = ref('0651 966 45 88')
+const email = ref('pizzeria@adriatrier.de')
 const phoneTitle = ref('Per Telefon')
 const phoneDescription = ref('Rufen Sie uns direkt während unserer Öffnungszeiten an')
 const emailTitle = ref('Per E-Mail')
