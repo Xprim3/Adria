@@ -175,11 +175,6 @@ const formatDate = (dateString: string): string => {
   })
 }
 
-const goToSlide = (index: number) => {
-  currentIndex.value = index
-  resetAutoScroll()
-}
-
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % reviewGroups.value.length
 }

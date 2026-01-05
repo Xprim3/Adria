@@ -1,5 +1,3 @@
-import { onMounted } from 'vue'
-
 export function useSEO() {
   const updateMetaTags = (title: string, description: string, image?: string) => {
     // Update document title

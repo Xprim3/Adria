@@ -41,7 +41,7 @@
         <!-- Desktop Navigation - Clean Color Transitions Only -->
         <ul class="hidden md:flex items-center gap-2 lg:gap-4" ref="navListRef">
           <li 
-            v-for="(item, index) in navItems" 
+            v-for="item in navItems" 
             :key="item.id"
             class="relative"
           >
@@ -166,7 +166,6 @@ const navItems: NavItem[] = [
 ]
 
 const navRef = ref<HTMLElement | null>(null)
-const logoRef = ref<HTMLElement | null>(null)
 const navListRef = ref<HTMLElement | null>(null)
 const mobileButtonRef = ref<HTMLElement | null>(null)
 

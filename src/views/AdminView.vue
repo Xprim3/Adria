@@ -41,7 +41,7 @@ const checkAuth = async () => {
   }
 }
 
-const handleLogin = (token: string, user: any) => {
+const handleLogin = (_token: string, _user: any) => {
   isAuthenticated.value = true
 }
 

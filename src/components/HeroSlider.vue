@@ -187,20 +187,6 @@ watch(() => slides.value.length, () => {
   startSlideShow()
 })
 
-const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    const headerHeight = 80
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-    const offsetPosition = elementPosition - headerHeight
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    })
-  }
-}
-
 onMounted(async () => {
   // Load slides from API
   await loadHeroSlides()
