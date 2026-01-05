@@ -1,0 +1,19 @@
+# Server files (not needed for frontend deployment)
+server/
+data/
+uploads/
+*.sqlite
+*.sqlite3
+*.db
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Node modules (will be installed fresh)
+node_modules/
+
+# Build artifacts
+dist/
+

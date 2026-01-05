@@ -10,6 +10,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  // Base path for GitHub Pages (uncomment if deploying to a subdirectory)
+  // base: process.env.NODE_ENV === 'production' ? '/your-repo-name/' : '/',
   server: {
     host: true, // Allow access from network
     port: 5173, // Default Vite port
@@ -19,6 +21,12 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    // Don't include server files in build
+    emptyOutDir: true
   }
 })
 
