@@ -26,15 +26,27 @@
               "
             ></div>
             
-            <h1 
-              class="text-2xl lg:text-3xl xl:text-4xl font-restaurant font-normal tracking-wide"
-              :class="isScrolled 
-                ? 'text-primary-red' 
-                : 'text-white drop-shadow-lg'
-              "
-            >
-              Adria
-            </h1>
+            <div class="flex flex-col">
+              <h1 
+                class="text-2xl lg:text-3xl xl:text-4xl font-restaurant font-normal tracking-wide leading-tight"
+                :class="isScrolled 
+                  ? 'text-primary-red' 
+                  : 'text-white drop-shadow-lg'
+                "
+              >
+                Adria
+              </h1>
+              <p 
+                class="text-xs lg:text-sm xl:text-base font-normal tracking-wide leading-tight mt-0.5"
+                style="font-family: 'Italiana', serif;"
+                :class="isScrolled 
+                  ? 'text-primary-dark/70' 
+                  : 'text-white/80 drop-shadow-md'
+                "
+              >
+                Pizzeria And Restaurant
+              </p>
+            </div>
           </a>
         </div>
 
