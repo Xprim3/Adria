@@ -37,9 +37,9 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Per Telefon bestellen</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ phoneOrderTitle }}</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben
+                      {{ phoneOrderDescription }}
                     </p>
                     <a :href="`tel:${phone || '+496519664588'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
                       {{ phone || '+49 651 966 45 88' }}
@@ -55,12 +55,12 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Unser Lieferservice</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ deliveryServiceTitle }}</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Schnelle und zuverlässige Lieferung direkt von unserer Küche an Ihre Haustür
+                      {{ deliveryServiceDescription1 }}
                     </p>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70">
-                      Wir liefern frische, heiße Mahlzeiten, die mit Sorgfalt zubereitet und schnell geliefert werden
+                      {{ deliveryServiceDescription2 }}
                     </p>
                   </div>
                 </div>
@@ -69,33 +69,25 @@
 
             <!-- Delivery Details -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Lieferinformationen</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ deliveryInfoTitle }}</h3>
               <div class="space-y-3 text-sm md:text-base text-primary-dark/70">
-                <div class="flex items-start gap-3">
+                <div 
+                  v-for="(item, index) in deliveryInfoItems" 
+                  :key="index" 
+                  class="flex items-start gap-3"
+                >
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Wir liefern direkt von unserem Restaurant an Ihre Haustür</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="text-primary-red font-semibold">•</span>
-                  <p>Wir beliefern hauptsächlich die Region in der Nähe unseres Restaurants - bitte rufen Sie uns an, um zu bestätigen, ob wir Ihre Adresse beliefern</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="text-primary-red font-semibold">•</span>
-                  <p>Mehrere Zahlungsoptionen: Barzahlung bei Lieferung, Karte oder Online-Zahlung</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="text-primary-red font-semibold">•</span>
-                  <p>Mindestbestellwert kann gelten - Lieferzeiten variieren je nach Entfernung und Bestellvolumen</p>
+                  <p>{{ item }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Alternative: Lieferando -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Alternative Bestelloption</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ alternativeOrderTitle }}</h3>
               <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
                 <p class="text-sm md:text-base text-primary-dark/70 mb-3">
-                  Sie können auch über unseren Partner <strong class="text-primary-dark">Lieferando</strong> bestellen, für bequemes Online-Bestellen.
+                  {{ alternativeOrderDescription }}
                 </p>
                 <a 
                   :href="lieferandoLink || 'https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier'" 
@@ -206,6 +198,20 @@ const defaultImages = [
 const heading = ref('Lieferung')
 const description = ref('Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.')
 const phone = ref('+49 651 966 45 88')
+const phoneOrderTitle = ref('Per Telefon bestellen')
+const phoneOrderDescription = ref('Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben')
+const deliveryServiceTitle = ref('Unser Lieferservice')
+const deliveryServiceDescription1 = ref('Schnelle und zuverlässige Lieferung direkt von unserer Küche an Ihre Haustür')
+const deliveryServiceDescription2 = ref('Wir liefern frische, heiße Mahlzeiten, die mit Sorgfalt zubereitet und schnell geliefert werden')
+const deliveryInfoTitle = ref('Lieferinformationen')
+const deliveryInfoItems = ref([
+  'Wir liefern direkt von unserem Restaurant an Ihre Haustür',
+  'Wir beliefern hauptsächlich die Region in der Nähe unseres Restaurants - bitte rufen Sie uns an, um zu bestätigen, ob wir Ihre Adresse beliefern',
+  'Mehrere Zahlungsoptionen: Barzahlung bei Lieferung, Karte oder Online-Zahlung',
+  'Mindestbestellwert kann gelten - Lieferzeiten variieren je nach Entfernung und Bestellvolumen'
+])
+const alternativeOrderTitle = ref('Alternative Bestelloption')
+const alternativeOrderDescription = ref('Sie können auch über unseren Partner Lieferando bestellen, für bequemes Online-Bestellen.')
 const lieferandoLink = ref('https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier')
 const images = ref(defaultImages)
 
@@ -228,6 +234,48 @@ const loadDeliveryContent = async () => {
     // Load phone
     if (data.phone?.value) {
       phone.value = data.phone.value
+    }
+    
+    // Load phone order info
+    if (data.phoneOrderTitle?.value) {
+      phoneOrderTitle.value = data.phoneOrderTitle.value
+    }
+    if (data.phoneOrderDescription?.value) {
+      phoneOrderDescription.value = data.phoneOrderDescription.value
+    }
+    
+    // Load delivery service info
+    if (data.deliveryServiceTitle?.value) {
+      deliveryServiceTitle.value = data.deliveryServiceTitle.value
+    }
+    if (data.deliveryServiceDescription1?.value) {
+      deliveryServiceDescription1.value = data.deliveryServiceDescription1.value
+    }
+    if (data.deliveryServiceDescription2?.value) {
+      deliveryServiceDescription2.value = data.deliveryServiceDescription2.value
+    }
+    
+    // Load delivery info
+    if (data.deliveryInfoTitle?.value) {
+      deliveryInfoTitle.value = data.deliveryInfoTitle.value
+    }
+    if (data.deliveryInfoItems?.value) {
+      try {
+        const parsed = JSON.parse(data.deliveryInfoItems.value)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          deliveryInfoItems.value = parsed
+        }
+      } catch (e) {
+        console.error('Error parsing delivery info items:', e)
+      }
+    }
+    
+    // Load alternative order info
+    if (data.alternativeOrderTitle?.value) {
+      alternativeOrderTitle.value = data.alternativeOrderTitle.value
+    }
+    if (data.alternativeOrderDescription?.value) {
+      alternativeOrderDescription.value = data.alternativeOrderDescription.value
     }
     
     // Load lieferandoLink

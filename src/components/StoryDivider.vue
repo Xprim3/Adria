@@ -7,11 +7,11 @@
     <div class="container mx-auto px-4 sm:px-6">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl sm:text-4xl md:text-5xl text-primary-dark mb-4 md:mb-5 font-normal tracking-wide" style="font-family: 'Italianno', cursive; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-          Unsere Geschichte
+          {{ heading || 'Unsere Geschichte' }}
         </h2>
         <div class="divider-line h-[1px] bg-gradient-to-r from-transparent via-primary-red/50 to-transparent w-full max-w-[280px] sm:max-w-[320px] mx-auto mb-5 md:mb-6"></div>
         <p class="text-sm sm:text-base md:text-lg text-primary-dark/80 leading-relaxed max-w-3xl mx-auto tracking-wide font-light px-2">
-          Pizzeria Adria bringt das Beste aus Italien nach Trier-Quint, wo Holzofen-Pizzen, handgemachte Pasten, klassische italienische Gerichte und herzliche Gastfreundschaft zusammenkommen, um ein authentisches kulinarisches Erlebnis zu schaffen.
+          {{ description || 'Pizzeria Adria bringt das Beste aus Italien nach Trier-Quint, wo Holzofen-Pizzen, handgemachte Pasten, klassische italienische Gerichte und herzliche Gastfreundschaft zusammenkommen, um ein authentisches kulinarisches Erlebnis zu schaffen.' }}
         </p>
       </div>
     </div>
@@ -27,9 +27,32 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
-const dividerRef = ref<HTMLElement | null>(null)
+const API_URL = import.meta.env.VITE_API_URL || '/api'
 
-onMounted(() => {
+const dividerRef = ref<HTMLElement | null>(null)
+const heading = ref('Unsere Geschichte')
+const description = ref('Pizzeria Adria bringt das Beste aus Italien nach Trier-Quint, wo Holzofen-Pizzen, handgemachte Pasten, klassische italienische Gerichte und herzliche Gastfreundschaft zusammenkommen, um ein authentisches kulinarisches Erlebnis zu schaffen.')
+
+// Load divider content from API
+const loadDividerContent = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/divider-story`)
+    const data = await response.json()
+    
+    if (data.heading?.value) {
+      heading.value = data.heading.value
+    }
+    
+    if (data.description?.value) {
+      description.value = data.description.value
+    }
+  } catch (error) {
+    console.error('Error loading divider content:', error)
+  }
+}
+
+onMounted(async () => {
+  await loadDividerContent()
   if (dividerRef.value) {
     const title = dividerRef.value.querySelector('h2')
     const line = dividerRef.value.querySelector('.divider-line')

@@ -151,32 +151,61 @@
               </div>
             </div>
 
-            <!-- Story Divider -->
-            <div v-if="activeSection === 'story-divider'" class="space-y-4 sm:space-y-6">
-              <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Story Divider</h2>
-              <div class="space-y-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Heading</label>
-                  <input
-                    v-model="storyDividerContent.heading"
-                    type="text"
-                    class="w-full px-3 py-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
-                  />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                  <textarea
-                    v-model="storyDividerContent.description"
-                    rows="3"
-                    class="w-full px-3 py-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
-                  ></textarea>
-                </div>
-                <button
-                  @click="saveSection('story-divider')"
-                  class="w-full sm:w-auto px-6 py-2 bg-primary-red text-white rounded-lg hover:bg-primary-red/90 text-sm sm:text-base"
+            <!-- Dividers Section -->
+            <div v-if="activeSection === 'dividers'" class="space-y-6">
+              <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Dividers Management</h2>
+              <p class="text-sm text-gray-600 mb-6">Manage all section dividers. Edit headings and descriptions for each divider.</p>
+              
+              <div class="space-y-6">
+                <div 
+                  v-for="(divider, key) in dividersContent" 
+                  :key="key"
+                  class="border border-gray-200 rounded-lg p-4 sm:p-6 bg-white"
                 >
-                  Save
-                </button>
+                  <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-primary-dark mb-1">{{ divider.name }}</h3>
+                    <p class="text-xs text-gray-500">ID: {{ divider.id }}</p>
+                  </div>
+                  
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Divider Name</label>
+                      <input
+                        v-model="divider.name"
+                        type="text"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="e.g. Story Divider"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Heading</label>
+                      <input
+                        v-model="divider.heading"
+                        type="text"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Divider heading text"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                      <textarea
+                        v-model="divider.description"
+                        rows="3"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Divider description text"
+                      ></textarea>
+                    </div>
+                    
+                    <button
+                      @click="saveDivider(divider.id)"
+                      class="w-full sm:w-auto px-4 py-2 bg-primary-red text-white rounded-lg hover:bg-primary-red/90 text-sm"
+                    >
+                      Save {{ divider.name }}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -335,7 +364,7 @@
                 <div class="border-t pt-4 mt-4">
                   <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Menu Categories</label>
-                    <p class="text-xs text-gray-500 mt-1">Edit existing categories only</p>
+                    <p class="text-xs text-gray-500 mt-1">You can rename existing categories. Empty categories can be removed.</p>
                   </div>
                   <div class="space-y-3">
                     <div 
@@ -343,8 +372,16 @@
                       :key="index" 
                       class="border border-gray-200 rounded-lg p-3"
                     >
-                      <div class="mb-2">
+                      <div class="mb-2 flex justify-between items-center">
                         <h4 class="font-medium text-sm">Category {{ index + 1 }}</h4>
+                        <button
+                          v-if="!category.name && !category.count"
+                          @click="menuContent.categories.splice(index, 1)"
+                          class="px-3 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm whitespace-nowrap"
+                          title="Remove empty category"
+                        >
+                          Remove
+                        </button>
                       </div>
                       <div class="grid grid-cols-2 gap-3">
                         <div>
@@ -415,7 +452,196 @@
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
                   />
                 </div>
-                <div>
+
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">How to Reserve</h3>
+                  
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Phone Title</label>
+                      <input
+                        v-model="reservationContent.phoneTitle"
+                        type="text"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="e.g. Per Telefon"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Phone Description</label>
+                      <textarea
+                        v-model="reservationContent.phoneDescription"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Description for phone reservations"
+                      ></textarea>
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Email Title</label>
+                      <input
+                        v-model="reservationContent.emailTitle"
+                        type="text"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="e.g. Per E-Mail"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Email Description</label>
+                      <textarea
+                        v-model="reservationContent.emailDescription"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Description for email reservations"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Location</h3>
+                  
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Location Title</label>
+                      <input
+                        v-model="reservationContent.locationTitle"
+                        type="text"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="e.g. Standort"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Location Address</label>
+                      <textarea
+                        v-model="reservationContent.locationAddress"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Restaurant address"
+                      ></textarea>
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Maps Link</label>
+                      <input
+                        v-model="reservationContent.locationMapsLink"
+                        type="text"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Google Maps link"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Reservation Details</h3>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Reservation Details Title</label>
+                    <input
+                      v-model="reservationContent.reservationDetailsTitle"
+                      type="text"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                      placeholder="e.g. Reservierungsdetails"
+                    />
+                  </div>
+                  
+                  <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Reservation Details Items</label>
+                    <div class="space-y-2">
+                      <div 
+                        v-for="(item, index) in reservationContent.reservationDetailsItems" 
+                        :key="index" 
+                        class="flex gap-2 items-center"
+                      >
+                        <textarea
+                          v-model="reservationContent.reservationDetailsItems[index]"
+                          rows="2"
+                          class="flex-1 px-2 py-1 text-sm border border-gray-300 rounded-md"
+                          placeholder="Reservation detail item"
+                        ></textarea>
+                        <button
+                          @click="reservationContent.reservationDetailsItems.splice(index, 1)"
+                          class="px-3 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm whitespace-nowrap"
+                          :disabled="reservationContent.reservationDetailsItems.length <= 1"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <button
+                        @click="reservationContent.reservationDetailsItems.push('')"
+                        class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
+                      >
+                        + Add Item
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Best Call Times</h3>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Best Call Times Title</label>
+                    <input
+                      v-model="reservationContent.bestCallTimesTitle"
+                      type="text"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                      placeholder="e.g. Beste Anrufzeiten"
+                    />
+                  </div>
+                  
+                  <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Best Call Times Description</label>
+                    <textarea
+                      v-model="reservationContent.bestCallTimesDescription"
+                      rows="2"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                      placeholder="Description for best call times"
+                    ></textarea>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Call Times</label>
+                    <div class="space-y-2">
+                      <div 
+                        v-for="(timeSlot, index) in reservationContent.bestCallTimes" 
+                        :key="index" 
+                        class="flex gap-2 items-center"
+                      >
+                        <input
+                          v-model="timeSlot.days"
+                          type="text"
+                          placeholder="Days"
+                          class="flex-1 px-2 py-1 text-sm border border-gray-300 rounded-md"
+                        />
+                        <input
+                          v-model="timeSlot.time"
+                          type="text"
+                          placeholder="Time"
+                          class="flex-1 px-2 py-1 text-sm border border-gray-300 rounded-md"
+                        />
+                        <button
+                          @click="reservationContent.bestCallTimes.splice(index, 1)"
+                          class="px-3 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm whitespace-nowrap"
+                          :disabled="reservationContent.bestCallTimes.length <= 1"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <button
+                        @click="reservationContent.bestCallTimes.push({ days: '', time: '' })"
+                        class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
+                      >
+                        + Add Time Slot
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4 mt-4">
                   <label class="block text-sm font-medium text-gray-700 mb-2">Images (4 images)</label>
                   <div class="grid grid-cols-2 gap-4">
                     <div v-for="(_, index) in reservationContent.images" :key="index">
@@ -436,6 +662,7 @@
                     </div>
                   </div>
                 </div>
+
                 <button
                   @click="saveSection('reservation')"
                   class="w-full sm:w-auto px-6 py-2 bg-primary-red text-white rounded-lg hover:bg-primary-red/90 text-sm sm:text-base"
@@ -473,15 +700,141 @@
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
                   />
                 </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Lieferando Link</label>
-                  <input
-                    v-model="deliveryContent.lieferandoLink"
-                    type="text"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
-                  />
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Order Information</h3>
+                  
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Phone Order Title</label>
+                      <input
+                        v-model="deliveryContent.phoneOrderTitle"
+                        type="text"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="e.g. Per Telefon bestellen"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Phone Order Description</label>
+                      <textarea
+                        v-model="deliveryContent.phoneOrderDescription"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Description for phone ordering"
+                      ></textarea>
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Service Title</label>
+                      <input
+                        v-model="deliveryContent.deliveryServiceTitle"
+                        type="text"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="e.g. Unser Lieferservice"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Service Description 1</label>
+                      <textarea
+                        v-model="deliveryContent.deliveryServiceDescription1"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="First description paragraph"
+                      ></textarea>
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Service Description 2</label>
+                      <textarea
+                        v-model="deliveryContent.deliveryServiceDescription2"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Second description paragraph"
+                      ></textarea>
+                    </div>
+                  </div>
                 </div>
-                <div>
+
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Delivery Information</h3>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Info Title</label>
+                    <input
+                      v-model="deliveryContent.deliveryInfoTitle"
+                      type="text"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                      placeholder="e.g. Lieferinformationen"
+                    />
+                  </div>
+                  
+                  <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Info Items</label>
+                    <div class="space-y-2">
+                      <div 
+                        v-for="(item, index) in deliveryContent.deliveryInfoItems" 
+                        :key="index" 
+                        class="flex gap-2 items-center"
+                      >
+                        <textarea
+                          v-model="deliveryContent.deliveryInfoItems[index]"
+                          rows="2"
+                          class="flex-1 px-2 py-1 text-sm border border-gray-300 rounded-md"
+                          placeholder="Delivery info item"
+                        ></textarea>
+                        <button
+                          @click="deliveryContent.deliveryInfoItems.splice(index, 1)"
+                          class="px-3 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm whitespace-nowrap"
+                          :disabled="deliveryContent.deliveryInfoItems.length <= 1"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <button
+                        @click="deliveryContent.deliveryInfoItems.push('')"
+                        class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
+                      >
+                        + Add Item
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4 mt-4">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Alternative Order Option</h3>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Alternative Order Title</label>
+                    <input
+                      v-model="deliveryContent.alternativeOrderTitle"
+                      type="text"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                      placeholder="e.g. Alternative Bestelloption"
+                    />
+                  </div>
+                  
+                  <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Alternative Order Description</label>
+                    <textarea
+                      v-model="deliveryContent.alternativeOrderDescription"
+                      rows="2"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                      placeholder="Description for alternative ordering option"
+                    ></textarea>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Lieferando Link</label>
+                    <input
+                      v-model="deliveryContent.lieferandoLink"
+                      type="text"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                    />
+                  </div>
+                </div>
+
+                <div class="border-t pt-4 mt-4">
                   <label class="block text-sm font-medium text-gray-700 mb-2">Images (4 images)</label>
                   <div class="grid grid-cols-2 gap-4">
                     <div v-for="(_, index) in deliveryContent.images" :key="index">
@@ -502,6 +855,7 @@
                     </div>
                   </div>
                 </div>
+
                 <button
                   @click="saveSection('delivery')"
                   class="w-full sm:w-auto px-6 py-2 bg-primary-red text-white rounded-lg hover:bg-primary-red/90 text-sm sm:text-base"
@@ -558,7 +912,11 @@
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Opening Hours</label>
                   <div class="space-y-2">
-                    <div v-for="(hours, index) in locationContent.openingHours" :key="index" class="flex gap-2">
+                    <div 
+                      v-for="(hours, index) in locationContent.openingHours" 
+                      :key="index" 
+                      class="flex gap-2 items-center"
+                    >
                       <input
                         v-model="hours.days"
                         type="text"
@@ -571,6 +929,13 @@
                         placeholder="Time"
                         class="flex-1 px-2 py-1 text-sm border border-gray-300 rounded-md"
                       />
+                      <button
+                        @click="locationContent.openingHours.splice(index, 1)"
+                        class="px-3 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm whitespace-nowrap"
+                        :disabled="locationContent.openingHours.length <= 1"
+                      >
+                        Remove
+                      </button>
                     </div>
                     <button
                       @click="locationContent.openingHours.push({ days: '', time: '' })"
@@ -873,7 +1238,7 @@ const activeSection = ref('hero')
 const mobileMenuOpen = ref(false)
 const sections = [
   { id: 'hero', label: 'Hero Section' },
-  { id: 'story-divider', label: 'Story Divider' },
+  { id: 'dividers', label: 'Dividers' },
   { id: 'about', label: 'About Us' },
   { id: 'menu', label: 'Menu' },
   { id: 'reservation', label: 'Reservation' },
@@ -891,9 +1256,13 @@ const heroContent = ref({
   ]
 })
 
-const storyDividerContent = ref({
-  heading: '',
-  description: ''
+// Dividers content - unified management
+const dividersContent = ref({
+  story: { id: 'story', name: 'Story Divider', heading: 'Unsere Geschichte', description: 'Pizzeria Adria bringt das Beste aus Italien nach Trier-Quint, wo Holzofen-Pizzen, handgemachte Pasten, klassische italienische Gerichte und herzliche Gastfreundschaft zusammenkommen, um ein authentisches kulinarisches Erlebnis zu schaffen.' },
+  menu: { id: 'menu', name: 'Menu Divider', heading: 'Speisekarte', description: 'Entdecken Sie unsere authentische italienische Küche mit traditionellen Holzofen-Pizzen, handgemachten Pasten und klassischen italienischen Spezialitäten. Jedes Gericht wird mit den besten Zutaten und bewährten Techniken zubereitet.' },
+  reservations: { id: 'reservations', name: 'Reservations Divider', heading: 'Reservierung & Lieferung', description: 'Reservieren Sie Ihren Tisch für ein unvergessliches kulinarisches Erlebnis oder genießen Sie unsere authentische italienische Küche direkt an Ihrer Haustür. Wir bringen Ihnen den Geschmack Italiens, ob Sie bei uns speisen oder in den eigenen vier Wänden.' },
+  location: { id: 'location', name: 'Location Divider', heading: 'Standort', description: 'Besuchen Sie uns in unserem Restaurant in Trier. Wir heißen Sie mit authentischer italienischer Küche und herzlicher Gastfreundschaft willkommen.' },
+  testimonials: { id: 'testimonials', name: 'Testimonials Divider', heading: 'Was unsere Gäste sagen', description: 'Hören Sie von unseren geschätzten Kunden über ihre kulinarischen Erfahrungen in der Pizzeria Adria' },
 })
 
 const aboutContent = ref({
@@ -932,6 +1301,26 @@ const reservationContent = ref({
   description: 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.',
   phone: '+49 651 966 45 88',
   email: 'reservations@pizzeriaadria.de',
+  phoneTitle: 'Per Telefon',
+  phoneDescription: 'Rufen Sie uns direkt während unserer Öffnungszeiten an',
+  emailTitle: 'Per E-Mail',
+  emailDescription: 'Senden Sie uns eine E-Mail mit Ihrem bevorzugten Datum und Ihrer Uhrzeit',
+  locationTitle: 'Standort',
+  locationAddress: 'Koblenzer Str. 1F, 54293 Trier, Deutschland',
+  locationMapsLink: 'https://maps.app.goo.gl/HLMABPcUAv37hV1H7',
+  reservationDetailsTitle: 'Reservierungsdetails',
+  reservationDetailsItems: [
+    'Reservierungen werden empfohlen, insbesondere für Wochenenden und besondere Anlässe',
+    'Bitte informieren Sie uns bei der Buchung über diätetische Einschränkungen oder besondere Wünsche',
+    'Reservierungen für größere Gruppen (8+ Gäste) sollten mindestens 48 Stunden im Voraus vorgenommen werden',
+    'Wir richten private Veranstaltungen und Feiern aus - kontaktieren Sie uns für spezielle Arrangements'
+  ],
+  bestCallTimesTitle: 'Beste Anrufzeiten',
+  bestCallTimesDescription: 'Für die beste Verfügbarkeit empfehlen wir, während unserer ruhigeren Stunden anzurufen:',
+  bestCallTimes: [
+    { days: 'Montag – Donnerstag', time: '14:00 – 17:00 Uhr' },
+    { days: 'Freitag – Sonntag', time: '14:00 – 16:00 Uhr' }
+  ],
   images: [
     'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
@@ -944,6 +1333,20 @@ const deliveryContent = ref({
   heading: 'Lieferung',
   description: 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.',
   phone: '+49 651 966 45 88',
+  phoneOrderTitle: 'Per Telefon bestellen',
+  phoneOrderDescription: 'Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben',
+  deliveryServiceTitle: 'Unser Lieferservice',
+  deliveryServiceDescription1: 'Schnelle und zuverlässige Lieferung direkt von unserer Küche an Ihre Haustür',
+  deliveryServiceDescription2: 'Wir liefern frische, heiße Mahlzeiten, die mit Sorgfalt zubereitet und schnell geliefert werden',
+  deliveryInfoTitle: 'Lieferinformationen',
+  deliveryInfoItems: [
+    'Wir liefern direkt von unserem Restaurant an Ihre Haustür',
+    'Wir beliefern hauptsächlich die Region in der Nähe unseres Restaurants - bitte rufen Sie uns an, um zu bestätigen, ob wir Ihre Adresse beliefern',
+    'Mehrere Zahlungsoptionen: Barzahlung bei Lieferung, Karte oder Online-Zahlung',
+    'Mindestbestellwert kann gelten - Lieferzeiten variieren je nach Entfernung und Bestellvolumen'
+  ],
+  alternativeOrderTitle: 'Alternative Bestelloption',
+  alternativeOrderDescription: 'Sie können auch über unseren Partner Lieferando bestellen, für bequemes Online-Bestellen.',
   lieferandoLink: 'https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier',
   images: [
     'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
@@ -1060,7 +1463,7 @@ const getAuthHeaders = () => {
 const loadAllSections = async () => {
   await Promise.all([
     loadSection('hero'),
-    loadSection('story-divider'),
+    loadDividers(),
     loadSection('about'),
     loadSection('menu'),
     loadSection('reservation'),
@@ -1070,6 +1473,58 @@ const loadAllSections = async () => {
     loadSection('footer'),
     loadNews()
   ])
+}
+
+// Load all dividers
+const loadDividers = async () => {
+  const dividerIds = ['story', 'menu', 'reservations', 'location', 'testimonials']
+  
+  await Promise.all(dividerIds.map(async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/content/divider-${id}`)
+      const data = await response.json()
+      
+      if (dividersContent.value[id]) {
+        dividersContent.value[id].heading = data.heading?.value || dividersContent.value[id].heading
+        dividersContent.value[id].description = data.description?.value || dividersContent.value[id].description
+        dividersContent.value[id].name = data.name?.value || dividersContent.value[id].name
+      }
+    } catch (error) {
+      console.error(`Error loading divider ${id}:`, error)
+    }
+  }))
+  
+  console.log('Dividers loaded:', dividersContent.value)
+}
+
+// Save individual divider
+const saveDivider = async (dividerId: string) => {
+  try {
+    const divider = dividersContent.value[dividerId as keyof typeof dividersContent.value]
+    if (!divider) {
+      console.error('Divider not found:', dividerId)
+      return
+    }
+    
+    const updates = [
+      { field: 'heading', value: divider.heading },
+      { field: 'description', value: divider.description },
+      { field: 'name', value: divider.name }
+    ]
+    
+    for (const update of updates) {
+      await fetch(`${API_URL}/content/divider-${dividerId}/${update.field}`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ value: update.value })
+      })
+    }
+    
+    alert(`${divider.name} saved successfully!`)
+  } catch (error) {
+    console.error('Error saving divider:', error)
+    alert('Error saving divider. Please try again.')
+  }
 }
 
 const loadSection = async (section: string) => {
@@ -1096,12 +1551,6 @@ const loadSection = async (section: string) => {
               { title: 'Genießen Sie den Geschmack Italiens', subtitle: 'Von klassisch bis kreativ - für jeden Geschmack', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=2081&q=80' }
             ]
           }
-        }
-        break
-      case 'story-divider':
-        storyDividerContent.value = {
-          heading: data.heading?.value || '',
-          description: data.description?.value || ''
         }
         break
       case 'about':
@@ -1195,6 +1644,26 @@ const loadSection = async (section: string) => {
         const defaultDescription = 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.'
         const defaultPhone = '+49 651 966 45 88'
         const defaultEmail = 'reservations@pizzeriaadria.de'
+        const defaultPhoneTitle = 'Per Telefon'
+        const defaultPhoneDescription = 'Rufen Sie uns direkt während unserer Öffnungszeiten an'
+        const defaultEmailTitle = 'Per E-Mail'
+        const defaultEmailDescription = 'Senden Sie uns eine E-Mail mit Ihrem bevorzugten Datum und Ihrer Uhrzeit'
+        const defaultLocationTitle = 'Standort'
+        const defaultLocationAddress = 'Koblenzer Str. 1F, 54293 Trier, Deutschland'
+        const defaultLocationMapsLink = 'https://maps.app.goo.gl/HLMABPcUAv37hV1H7'
+        const defaultReservationDetailsTitle = 'Reservierungsdetails'
+        const defaultReservationDetailsItems = [
+          'Reservierungen werden empfohlen, insbesondere für Wochenenden und besondere Anlässe',
+          'Bitte informieren Sie uns bei der Buchung über diätetische Einschränkungen oder besondere Wünsche',
+          'Reservierungen für größere Gruppen (8+ Gäste) sollten mindestens 48 Stunden im Voraus vorgenommen werden',
+          'Wir richten private Veranstaltungen und Feiern aus - kontaktieren Sie uns für spezielle Arrangements'
+        ]
+        const defaultBestCallTimesTitle = 'Beste Anrufzeiten'
+        const defaultBestCallTimesDescription = 'Für die beste Verfügbarkeit empfehlen wir, während unserer ruhigeren Stunden anzurufen:'
+        const defaultBestCallTimes = [
+          { days: 'Montag – Donnerstag', time: '14:00 – 17:00 Uhr' },
+          { days: 'Freitag – Sonntag', time: '14:00 – 16:00 Uhr' }
+        ]
         const defaultImages = [
           'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
           'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
@@ -1218,11 +1687,49 @@ const loadSection = async (section: string) => {
           }
         }
         
+        // Load reservation details items
+        let loadedReservationDetailsItems = defaultReservationDetailsItems
+        if (data.reservationDetailsItems?.value) {
+          try {
+            const parsed = JSON.parse(data.reservationDetailsItems.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              loadedReservationDetailsItems = parsed
+            }
+          } catch (e) {
+            console.error('Error parsing reservation details items:', e)
+          }
+        }
+        
+        // Load best call times
+        let loadedBestCallTimes = defaultBestCallTimes
+        if (data.bestCallTimes?.value) {
+          try {
+            const parsed = JSON.parse(data.bestCallTimes.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              loadedBestCallTimes = parsed
+            }
+          } catch (e) {
+            console.error('Error parsing best call times:', e)
+          }
+        }
+        
         reservationContent.value = {
           heading: data.heading?.value || defaultHeading,
           description: data.description?.value || defaultDescription,
           phone: data.phone?.value || defaultPhone,
           email: data.email?.value || defaultEmail,
+          phoneTitle: data.phoneTitle?.value || defaultPhoneTitle,
+          phoneDescription: data.phoneDescription?.value || defaultPhoneDescription,
+          emailTitle: data.emailTitle?.value || defaultEmailTitle,
+          emailDescription: data.emailDescription?.value || defaultEmailDescription,
+          locationTitle: data.locationTitle?.value || defaultLocationTitle,
+          locationAddress: data.locationAddress?.value || defaultLocationAddress,
+          locationMapsLink: data.locationMapsLink?.value || defaultLocationMapsLink,
+          reservationDetailsTitle: data.reservationDetailsTitle?.value || defaultReservationDetailsTitle,
+          reservationDetailsItems: loadedReservationDetailsItems,
+          bestCallTimesTitle: data.bestCallTimesTitle?.value || defaultBestCallTimesTitle,
+          bestCallTimesDescription: data.bestCallTimesDescription?.value || defaultBestCallTimesDescription,
+          bestCallTimes: loadedBestCallTimes,
           images: loadedImages
         }
         
@@ -1233,6 +1740,20 @@ const loadSection = async (section: string) => {
         const defaultDeliveryHeading = 'Lieferung'
         const defaultDeliveryDescription = 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.'
         const defaultDeliveryPhone = '+49 651 966 45 88'
+        const defaultPhoneOrderTitle = 'Per Telefon bestellen'
+        const defaultPhoneOrderDescription = 'Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben'
+        const defaultDeliveryServiceTitle = 'Unser Lieferservice'
+        const defaultDeliveryServiceDescription1 = 'Schnelle und zuverlässige Lieferung direkt von unserer Küche an Ihre Haustür'
+        const defaultDeliveryServiceDescription2 = 'Wir liefern frische, heiße Mahlzeiten, die mit Sorgfalt zubereitet und schnell geliefert werden'
+        const defaultDeliveryInfoTitle = 'Lieferinformationen'
+        const defaultDeliveryInfoItems = [
+          'Wir liefern direkt von unserem Restaurant an Ihre Haustür',
+          'Wir beliefern hauptsächlich die Region in der Nähe unseres Restaurants - bitte rufen Sie uns an, um zu bestätigen, ob wir Ihre Adresse beliefern',
+          'Mehrere Zahlungsoptionen: Barzahlung bei Lieferung, Karte oder Online-Zahlung',
+          'Mindestbestellwert kann gelten - Lieferzeiten variieren je nach Entfernung und Bestellvolumen'
+        ]
+        const defaultAlternativeOrderTitle = 'Alternative Bestelloption'
+        const defaultAlternativeOrderDescription = 'Sie können auch über unseren Partner Lieferando bestellen, für bequemes Online-Bestellen.'
         const defaultLieferandoLink = 'https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier'
         const defaultDeliveryImages = [
           'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
@@ -1257,10 +1778,32 @@ const loadSection = async (section: string) => {
           }
         }
         
+        // Load delivery info items
+        let loadedDeliveryInfoItems = defaultDeliveryInfoItems
+        if (data.deliveryInfoItems?.value) {
+          try {
+            const parsed = JSON.parse(data.deliveryInfoItems.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              loadedDeliveryInfoItems = parsed
+            }
+          } catch (e) {
+            console.error('Error parsing delivery info items:', e)
+          }
+        }
+        
         deliveryContent.value = {
           heading: data.heading?.value || defaultDeliveryHeading,
           description: data.description?.value || defaultDeliveryDescription,
           phone: data.phone?.value || defaultDeliveryPhone,
+          phoneOrderTitle: data.phoneOrderTitle?.value || defaultPhoneOrderTitle,
+          phoneOrderDescription: data.phoneOrderDescription?.value || defaultPhoneOrderDescription,
+          deliveryServiceTitle: data.deliveryServiceTitle?.value || defaultDeliveryServiceTitle,
+          deliveryServiceDescription1: data.deliveryServiceDescription1?.value || defaultDeliveryServiceDescription1,
+          deliveryServiceDescription2: data.deliveryServiceDescription2?.value || defaultDeliveryServiceDescription2,
+          deliveryInfoTitle: data.deliveryInfoTitle?.value || defaultDeliveryInfoTitle,
+          deliveryInfoItems: loadedDeliveryInfoItems,
+          alternativeOrderTitle: data.alternativeOrderTitle?.value || defaultAlternativeOrderTitle,
+          alternativeOrderDescription: data.alternativeOrderDescription?.value || defaultAlternativeOrderDescription,
           lieferandoLink: data.lieferandoLink?.value || defaultLieferandoLink,
           images: loadedDeliveryImages
         }
@@ -1421,12 +1964,6 @@ const saveSection = async (section: string) => {
           { field: 'slides', value: JSON.stringify(heroContent.value.slides) }
         ]
         break
-      case 'story-divider':
-        updates = [
-          { field: 'heading', value: storyDividerContent.value.heading },
-          { field: 'description', value: storyDividerContent.value.description }
-        ]
-        break
       case 'about':
         updates = [
           { field: 'paragraph1', value: aboutContent.value.paragraph1 },
@@ -1450,6 +1987,18 @@ const saveSection = async (section: string) => {
           { field: 'description', value: reservationContent.value.description },
           { field: 'phone', value: reservationContent.value.phone },
           { field: 'email', value: reservationContent.value.email },
+          { field: 'phoneTitle', value: reservationContent.value.phoneTitle },
+          { field: 'phoneDescription', value: reservationContent.value.phoneDescription },
+          { field: 'emailTitle', value: reservationContent.value.emailTitle },
+          { field: 'emailDescription', value: reservationContent.value.emailDescription },
+          { field: 'locationTitle', value: reservationContent.value.locationTitle },
+          { field: 'locationAddress', value: reservationContent.value.locationAddress },
+          { field: 'locationMapsLink', value: reservationContent.value.locationMapsLink },
+          { field: 'reservationDetailsTitle', value: reservationContent.value.reservationDetailsTitle },
+          { field: 'reservationDetailsItems', value: JSON.stringify(reservationContent.value.reservationDetailsItems) },
+          { field: 'bestCallTimesTitle', value: reservationContent.value.bestCallTimesTitle },
+          { field: 'bestCallTimesDescription', value: reservationContent.value.bestCallTimesDescription },
+          { field: 'bestCallTimes', value: JSON.stringify(reservationContent.value.bestCallTimes) },
           { field: 'images', value: JSON.stringify(reservationContent.value.images) }
         ]
         break
@@ -1458,6 +2007,15 @@ const saveSection = async (section: string) => {
           { field: 'heading', value: deliveryContent.value.heading },
           { field: 'description', value: deliveryContent.value.description },
           { field: 'phone', value: deliveryContent.value.phone },
+          { field: 'phoneOrderTitle', value: deliveryContent.value.phoneOrderTitle },
+          { field: 'phoneOrderDescription', value: deliveryContent.value.phoneOrderDescription },
+          { field: 'deliveryServiceTitle', value: deliveryContent.value.deliveryServiceTitle },
+          { field: 'deliveryServiceDescription1', value: deliveryContent.value.deliveryServiceDescription1 },
+          { field: 'deliveryServiceDescription2', value: deliveryContent.value.deliveryServiceDescription2 },
+          { field: 'deliveryInfoTitle', value: deliveryContent.value.deliveryInfoTitle },
+          { field: 'deliveryInfoItems', value: JSON.stringify(deliveryContent.value.deliveryInfoItems) },
+          { field: 'alternativeOrderTitle', value: deliveryContent.value.alternativeOrderTitle },
+          { field: 'alternativeOrderDescription', value: deliveryContent.value.alternativeOrderDescription },
           { field: 'lieferandoLink', value: deliveryContent.value.lieferandoLink },
           { field: 'images', value: JSON.stringify(deliveryContent.value.images) }
         ]

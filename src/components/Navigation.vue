@@ -80,8 +80,7 @@
         <button
           @click="toggleMobileMenu"
           ref="mobileButtonRef"
-          class="lg:hidden p-2 transition-colors duration-300"
-          :class="isScrolled ? 'text-primary-red hover:text-primary-banner' : 'text-white hover:text-primary-red'"
+          class="lg:hidden p-2 text-white hover:text-white/80 transition-colors duration-300 focus:outline-none active:outline-none"
           aria-label="Toggle menu"
         >
           <svg

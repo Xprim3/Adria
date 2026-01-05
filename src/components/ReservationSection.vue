@@ -89,9 +89,9 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Per Telefon</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ phoneTitle }}</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Rufen Sie uns direkt während unserer Öffnungszeiten an
+                      {{ phoneDescription }}
                     </p>
                     <a :href="`tel:${phone || '+496519664588'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
                       {{ phone || '+49 651 966 45 88' }}
@@ -107,9 +107,9 @@
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Per E-Mail</h4>
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ emailTitle }}</h4>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                      Senden Sie uns eine E-Mail mit Ihrem bevorzugten Datum und Ihrer Uhrzeit
+                      {{ emailDescription }}
                     </p>
                     <a :href="`mailto:${email || 'reservations@pizzeriaadria.de'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
                       {{ email || 'reservations@pizzeriaadria.de' }}
@@ -129,12 +129,12 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">Standort</h4>
+                  <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ locationTitle }}</h4>
                   <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
-                    Koblenzer Str. 1F, 54293 Trier, Deutschland
+                    {{ locationAddress }}
                   </p>
                   <a 
-                    href="https://maps.app.goo.gl/HLMABPcUAv37hV1H7" 
+                    :href="locationMapsLink || 'https://maps.app.goo.gl/HLMABPcUAv37hV1H7'" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium"
@@ -147,42 +147,34 @@
 
             <!-- Reservation Details -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Reservierungsdetails</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ reservationDetailsTitle }}</h3>
               <div class="space-y-3 text-sm md:text-base text-primary-dark/70">
-                <div class="flex items-start gap-3">
+                <div 
+                  v-for="(item, index) in reservationDetailsItems" 
+                  :key="index" 
+                  class="flex items-start gap-3"
+                >
                   <span class="text-primary-red font-semibold">•</span>
-                  <p>Reservierungen werden empfohlen, insbesondere für Wochenenden und besondere Anlässe</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="text-primary-red font-semibold">•</span>
-                  <p>Bitte informieren Sie uns bei der Buchung über diätetische Einschränkungen oder besondere Wünsche</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="text-primary-red font-semibold">•</span>
-                  <p>Reservierungen für größere Gruppen (8+ Gäste) sollten mindestens 48 Stunden im Voraus vorgenommen werden</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="text-primary-red font-semibold">•</span>
-                  <p>Wir richten private Veranstaltungen und Feiern aus - kontaktieren Sie uns für spezielle Arrangements</p>
+                  <p>{{ item }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Opening Hours Reminder -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Beste Anrufzeiten</h3>
+              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ bestCallTimesTitle }}</h3>
               <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
                 <p class="text-sm md:text-base text-primary-dark/70 mb-3">
-                  Für die beste Verfügbarkeit empfehlen wir, während unserer ruhigeren Stunden anzurufen:
+                  {{ bestCallTimesDescription }}
                 </p>
                 <div class="space-y-2 text-sm md:text-base text-primary-dark">
-                  <div class="flex justify-between items-center">
-                    <span class="font-light">Montag – Donnerstag</span>
-                    <span class="font-medium">14:00 – 17:00 Uhr</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="font-light">Freitag – Sonntag</span>
-                    <span class="font-medium">14:00 – 16:00 Uhr</span>
+                  <div 
+                    v-for="(timeSlot, index) in bestCallTimes" 
+                    :key="index" 
+                    class="flex justify-between items-center"
+                  >
+                    <span class="font-light">{{ timeSlot.days }}</span>
+                    <span class="font-medium">{{ timeSlot.time }}</span>
                   </div>
                 </div>
               </div>
@@ -232,6 +224,26 @@ const heading = ref('Reservierungen')
 const description = ref('Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.')
 const phone = ref('+49 651 966 45 88')
 const email = ref('reservations@pizzeriaadria.de')
+const phoneTitle = ref('Per Telefon')
+const phoneDescription = ref('Rufen Sie uns direkt während unserer Öffnungszeiten an')
+const emailTitle = ref('Per E-Mail')
+const emailDescription = ref('Senden Sie uns eine E-Mail mit Ihrem bevorzugten Datum und Ihrer Uhrzeit')
+const locationTitle = ref('Standort')
+const locationAddress = ref('Koblenzer Str. 1F, 54293 Trier, Deutschland')
+const locationMapsLink = ref('https://maps.app.goo.gl/HLMABPcUAv37hV1H7')
+const reservationDetailsTitle = ref('Reservierungsdetails')
+const reservationDetailsItems = ref([
+  'Reservierungen werden empfohlen, insbesondere für Wochenenden und besondere Anlässe',
+  'Bitte informieren Sie uns bei der Buchung über diätetische Einschränkungen oder besondere Wünsche',
+  'Reservierungen für größere Gruppen (8+ Gäste) sollten mindestens 48 Stunden im Voraus vorgenommen werden',
+  'Wir richten private Veranstaltungen und Feiern aus - kontaktieren Sie uns für spezielle Arrangements'
+])
+const bestCallTimesTitle = ref('Beste Anrufzeiten')
+const bestCallTimesDescription = ref('Für die beste Verfügbarkeit empfehlen wir, während unserer ruhigeren Stunden anzurufen:')
+const bestCallTimes = ref([
+  { days: 'Montag – Donnerstag', time: '14:00 – 17:00 Uhr' },
+  { days: 'Freitag – Sonntag', time: '14:00 – 16:00 Uhr' }
+])
 const images = ref(defaultImages)
 
 // Load reservation content from API
@@ -258,6 +270,66 @@ const loadReservationContent = async () => {
     // Load email
     if (data.email?.value) {
       email.value = data.email.value
+    }
+    
+    // Load phone order info
+    if (data.phoneTitle?.value) {
+      phoneTitle.value = data.phoneTitle.value
+    }
+    if (data.phoneDescription?.value) {
+      phoneDescription.value = data.phoneDescription.value
+    }
+    
+    // Load email order info
+    if (data.emailTitle?.value) {
+      emailTitle.value = data.emailTitle.value
+    }
+    if (data.emailDescription?.value) {
+      emailDescription.value = data.emailDescription.value
+    }
+    
+    // Load location info
+    if (data.locationTitle?.value) {
+      locationTitle.value = data.locationTitle.value
+    }
+    if (data.locationAddress?.value) {
+      locationAddress.value = data.locationAddress.value
+    }
+    if (data.locationMapsLink?.value) {
+      locationMapsLink.value = data.locationMapsLink.value
+    }
+    
+    // Load reservation details
+    if (data.reservationDetailsTitle?.value) {
+      reservationDetailsTitle.value = data.reservationDetailsTitle.value
+    }
+    if (data.reservationDetailsItems?.value) {
+      try {
+        const parsed = JSON.parse(data.reservationDetailsItems.value)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          reservationDetailsItems.value = parsed
+        }
+      } catch (e) {
+        console.error('Error parsing reservation details items:', e)
+      }
+    }
+    
+    // Load best call times
+    if (data.bestCallTimesTitle?.value) {
+      bestCallTimesTitle.value = data.bestCallTimesTitle.value
+    }
+    if (data.bestCallTimesDescription?.value) {
+      bestCallTimesDescription.value = data.bestCallTimesDescription.value
+    }
+    if (data.bestCallTimes?.value) {
+      try {
+        const parsed = JSON.parse(data.bestCallTimes.value)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          bestCallTimes.value = parsed
+        }
+      } catch (e) {
+        console.error('Error parsing best call times:', e)
+      }
     }
     
     // Load images
