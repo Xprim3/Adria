@@ -49,14 +49,14 @@
               </div>
 
               <!-- Review Text -->
-              <p class="text-sm md:text-base lg:text-lg text-primary-dark/90 leading-relaxed mb-4 flex-1" style="font-family: 'Playfair Display', serif;">
+              <p class="text-sm sm:text-base md:text-lg lg:text-xl text-primary-dark/90 leading-relaxed mb-4 flex-1 px-2" style="font-family: 'Playfair Display', serif;">
                 "{{ review.text }}"
               </p>
 
               <!-- Reviewer Info -->
               <div class="pt-4 border-t border-primary-dark/10 w-full">
-                <p class="text-xs md:text-sm font-semibold text-primary-dark mb-1">{{ review.author }}</p>
-                <p class="text-xs text-primary-dark/60">{{ formatDate(review.date) }}</p>
+                <p class="text-sm sm:text-base font-semibold text-primary-dark mb-1">{{ review.author }}</p>
+                <p class="text-xs sm:text-sm text-primary-dark/70">{{ formatDate(review.date) }}</p>
               </div>
             </div>
             </div>

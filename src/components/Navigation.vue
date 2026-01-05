@@ -61,14 +61,14 @@
               :href="item.href"
               @click.prevent="scrollToSection(item.id)"
               :class="[
-                'nav-link px-3 xl:px-4 py-2.5 text-sm xl:text-base font-medium transition-colors duration-300 whitespace-nowrap',
+                'nav-link px-3 xl:px-4 py-2.5 text-sm xl:text-base font-medium transition-colors duration-300 whitespace-nowrap min-h-[44px] flex items-center',
                 isScrolled
                   ? activeSection === item.id
                     ? 'text-primary-red'
-                    : 'text-primary-dark/60 hover:text-primary-red'
+                    : 'text-primary-dark/70 hover:text-primary-red'
                   : activeSection === item.id
                     ? 'text-white drop-shadow-md'
-                    : 'text-white/70 hover:text-white'
+                    : 'text-white/80 hover:text-white'
               ]"
             >
               {{ item.label }}
@@ -80,11 +80,11 @@
         <button
           @click="toggleMobileMenu"
           ref="mobileButtonRef"
-          class="lg:hidden p-2 text-white hover:text-white/80 transition-colors duration-300 focus:outline-none active:outline-none"
+          class="lg:hidden p-1.5 sm:p-2 text-white hover:text-white/80 transition-colors duration-300 focus:outline-none active:outline-none w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 flex items-center justify-center touch-manipulation"
           aria-label="Toggle menu"
         >
           <svg
-            class="w-6 h-6 transition-transform duration-300 drop-shadow-md"
+            class="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 drop-shadow-md"
             :class="isMobileMenuOpen ? 'rotate-90' : ''"
             fill="none"
             stroke="currentColor"
@@ -164,10 +164,10 @@
                 <a
                   :href="item.href"
                   @click.prevent="scrollToSection(item.id)"
-                  class="flex items-center py-2.5 px-4 rounded-lg text-sm font-medium transition-all duration-200 text-primary-dark hover:text-primary-red hover:bg-primary-red/5 active:bg-primary-red/10"
+                  class="flex items-center py-3.5 px-4 rounded-lg text-base font-medium transition-all duration-200 text-primary-dark hover:text-primary-red hover:bg-primary-red/5 active:bg-primary-red/10 min-h-[48px] touch-manipulation"
                 >
                   <span class="flex-1">{{ item.label }}</span>
-                  <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </a>

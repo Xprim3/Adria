@@ -40,6 +40,18 @@
       scroll-margin-top: 6rem; /* 96px for larger screens */
     }
   }
+
+  /* Touch-friendly interactions */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improved text readability */
+  .text-readable {
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
 }
 
 @layer components {

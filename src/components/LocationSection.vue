@@ -34,7 +34,7 @@
         <div class="max-w-2xl w-full">
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
+            <h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5 leading-tight" style="font-family: 'Italianno', cursive;">
               {{ heading || 'Finden Sie uns' }}
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
@@ -42,7 +42,7 @@
               <div class="w-2 h-2 rounded-full bg-primary-red/60"></div>
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
-            <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg text-primary-dark/80 leading-relaxed">
               {{ description || 'Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.' }}
             </p>
           </div>
@@ -51,24 +51,24 @@
           <div class="space-y-5 md:space-y-6">
             <!-- Address -->
             <div>
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Adresse</h3>
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-red/10 flex items-center justify-center">
-                  <svg class="w-4 h-4 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <h3 class="text-xs sm:text-sm uppercase tracking-widest text-primary-red mb-4 font-semibold">Adresse</h3>
+              <div class="flex items-start gap-3 sm:gap-4">
+                <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary-red/10 flex items-center justify-center">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <div>
-                  <p class="text-sm sm:text-base md:text-lg text-primary-dark font-medium mb-2" v-html="formattedAddress"></p>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm sm:text-base md:text-lg text-primary-dark font-medium mb-3 leading-relaxed" v-html="formattedAddress"></p>
                   <a 
                     :href="mapsLink" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium"
+                    class="inline-flex items-center gap-2 text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] touch-manipulation"
                   >
                     <span>Route anzeigen</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </a>

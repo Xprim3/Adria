@@ -26,7 +26,7 @@
             <div class="h-full flex flex-col">
               <!-- Restaurant Header -->
               <div class="text-center mb-10 md:mb-12">
-                <h3 class="text-4xl md:text-5xl lg:text-6xl font-restaurant font-normal text-primary-dark mb-4" style="font-family: 'Italianno', cursive;">
+                <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-restaurant font-normal text-primary-dark mb-4 leading-tight" style="font-family: 'Italianno', cursive;">
                   Pizzeria Adria
                 </h3>
                 <div class="flex items-center justify-center gap-3 my-5">
@@ -34,7 +34,7 @@
                   <div class="w-2 h-2 rounded-full bg-primary-red/60"></div>
                   <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
                 </div>
-                <p class="text-base md:text-lg text-primary-dark/70 italic tracking-wide">Authentische italienische Küche</p>
+                <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 italic tracking-wide">Authentische italienische Küche</p>
               </div>
 
               <!-- Quote Section -->
@@ -51,7 +51,7 @@
                           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
                       </div>
-                      <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
+                      <blockquote class="text-base sm:text-lg md:text-xl lg:text-2xl text-primary-dark/90 leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
                         "{{ quote }}"
                       </blockquote>
                     </div>
@@ -82,7 +82,7 @@
             <div class="h-full flex flex-col">
               <!-- Menu Header -->
               <div class="text-center mb-10 md:mb-12">
-                <h3 class="text-4xl md:text-5xl lg:text-6xl font-restaurant font-normal text-primary-dark mb-4" style="font-family: 'Italianno', cursive;">
+                <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-restaurant font-normal text-primary-dark mb-4 leading-tight" style="font-family: 'Italianno', cursive;">
                   Speisekarte
                 </h3>
                 <div class="flex items-center justify-center gap-3 my-5">
@@ -90,7 +90,7 @@
                   <div class="w-2 h-2 rounded-full bg-primary-red/60"></div>
                   <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
                 </div>
-                <p class="text-base md:text-lg text-primary-dark/70">Unsere komplette Auswahl</p>
+                <p class="text-sm sm:text-base md:text-lg text-primary-dark/75">Unsere komplette Auswahl</p>
               </div>
 
               <!-- Clean Menu Categories List -->
@@ -114,28 +114,28 @@
               </div>
 
               <!-- Action Buttons -->
-              <div class="space-y-3" v-if="pdfUrl">
+              <div class="space-y-2 sm:space-y-3" v-if="pdfUrl">
                 <a
                   :href="pdfUrl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-primary-red to-primary-banner text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] group"
+                  class="w-full flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 md:py-4 bg-gradient-to-r from-primary-red to-primary-banner text-white rounded-lg font-medium text-sm sm:text-base md:text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] group min-h-[44px] sm:min-h-[48px] touch-manipulation"
                 >
-                  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
-                  <span>Vollständige Speisekarte ansehen</span>
+                  <span class="text-center">Vollständige Speisekarte ansehen</span>
                 </a>
                 <a
                   :href="pdfUrl"
                   download
-                  class="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white text-primary-red border-2 border-primary-red/30 hover:border-primary-red hover:bg-primary-red/5 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] group"
+                  class="w-full flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 md:py-4 bg-white text-primary-red border-2 border-primary-red/30 hover:border-primary-red hover:bg-primary-red/5 rounded-lg font-medium text-sm sm:text-base md:text-lg transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] group min-h-[44px] sm:min-h-[48px] touch-manipulation"
                 >
-                  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
-                  <span>PDF herunterladen</span>
+                  <span class="text-center">PDF herunterladen</span>
                 </a>
               </div>
             </div>

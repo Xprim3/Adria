@@ -17,8 +17,24 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 // Middleware
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? [
+      process.env.FRONTEND_URL || 'https://pizzeriaadria.de',
+      process.env.FRONTEND_URL_WWW || 'https://www.pizzeriaadria.de'
+    ]
+  : ['http://localhost:5173', 'http://localhost:3000']
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true)
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }))
 app.use(express.json())
@@ -38,7 +54,24 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' })
 })
 
+// Serve static files from dist folder (in production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')))
+  
+  // Handle Vue Router (SPA) - serve index.html for all non-API routes
+  app.get('*', (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/api')) {
+      return next()
+    }
+    res.sendFile(path.join(__dirname, '../dist/index.html'))
+  })
+}
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`Frontend served from dist/ folder`)
+  }
 })
 

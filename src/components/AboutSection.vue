@@ -26,7 +26,7 @@
         <div class="max-w-2xl w-full">
           <!-- Owner's Story -->
           <div>
-            <div class="space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed font-sans">
+            <div class="space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg lg:text-xl text-primary-dark/80 leading-relaxed font-sans">
               <p v-if="paragraph1" class="font-light">
                 {{ paragraph1 }}
               </p>
@@ -36,7 +36,7 @@
               <p v-if="paragraph3" class="font-light">
                 {{ paragraph3 }}
               </p>
-              <p v-if="ownerName" class="font-light text-primary-dark/85 mt-6 md:mt-8 text-right text-xl sm:text-2xl md:text-3xl" style="font-family: 'Italianno', cursive; font-weight: 400;">
+              <p v-if="ownerName" class="font-light text-primary-dark/90 mt-6 md:mt-8 text-right text-xl sm:text-2xl md:text-3xl lg:text-4xl" style="font-family: 'Italianno', cursive; font-weight: 400;">
                 — {{ ownerName }}
               </p>
             </div>

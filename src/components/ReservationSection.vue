@@ -62,7 +62,7 @@
         <div class="max-w-2xl w-full">
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
+            <h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5 leading-tight" style="font-family: 'Italianno', cursive;">
               {{ heading || 'Reservierungen' }}
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
@@ -70,7 +70,7 @@
               <div class="w-2 h-2 rounded-full bg-primary-red/60"></div>
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
-            <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg text-primary-dark/80 leading-relaxed">
               {{ description || 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.' }}
             </p>
           </div>
@@ -79,39 +79,39 @@
           <div class="space-y-5 md:space-y-6">
             <!-- How to Reserve -->
             <div>
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-3 md:mb-4 font-semibold">Wie Sie eine Reservierung vornehmen</h3>
-              <div class="space-y-3 md:space-y-4">
+              <h3 class="text-xs sm:text-sm uppercase tracking-widest text-primary-red mb-3 md:mb-4 font-semibold">Wie Sie eine Reservierung vornehmen</h3>
+              <div class="space-y-4 sm:space-y-5">
                 <!-- Phone -->
-                <div class="flex items-start gap-4">
-                  <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-red/10 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start gap-3 sm:gap-4">
+                  <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary-red/10 flex items-center justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
-                  <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ phoneTitle }}</h4>
-                    <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
+                  <div class="flex-1 min-w-0">
+                    <h4 class="text-base sm:text-lg md:text-xl font-semibold text-primary-dark mb-2">{{ phoneTitle }}</h4>
+                    <p class="text-sm sm:text-base text-primary-dark/75 mb-3 leading-relaxed">
                       {{ phoneDescription }}
                     </p>
-                    <a :href="`tel:${phone || '+496519664588'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                    <a :href="`tel:${phone || '+496519664588'}`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation">
                       {{ phone || '+49 651 966 45 88' }}
                     </a>
                   </div>
                 </div>
 
                 <!-- Email -->
-                <div class="flex items-start gap-4">
-                  <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-red/10 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start gap-3 sm:gap-4">
+                  <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary-red/10 flex items-center justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <div>
-                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-primary-dark mb-1.5">{{ emailTitle }}</h4>
-                    <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
+                  <div class="flex-1 min-w-0">
+                    <h4 class="text-base sm:text-lg md:text-xl font-semibold text-primary-dark mb-2">{{ emailTitle }}</h4>
+                    <p class="text-sm sm:text-base text-primary-dark/75 mb-3 leading-relaxed">
                       {{ emailDescription }}
                     </p>
-                    <a :href="`mailto:${email || 'reservations@pizzeriaadria.de'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                    <a :href="`mailto:${email || 'reservations@pizzeriaadria.de'}`" class="inline-block text-base sm:text-lg md:text-xl text-primary-red hover:text-primary-banner transition-colors font-medium min-h-[44px] flex items-center touch-manipulation break-all">
                       {{ email || 'reservations@pizzeriaadria.de' }}
                     </a>
                   </div>
@@ -147,14 +147,14 @@
 
             <!-- Reservation Details -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ reservationDetailsTitle }}</h3>
-              <div class="space-y-3 text-sm md:text-base text-primary-dark/70">
+              <h3 class="text-xs sm:text-sm uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ reservationDetailsTitle }}</h3>
+              <div class="space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
                 <div 
                   v-for="(item, index) in reservationDetailsItems" 
                   :key="index" 
                   class="flex items-start gap-3"
                 >
-                  <span class="text-primary-red font-semibold">•</span>
+                  <span class="text-primary-red font-semibold text-lg flex-shrink-0 mt-0.5">•</span>
                   <p>{{ item }}</p>
                 </div>
               </div>
@@ -162,16 +162,16 @@
 
             <!-- Opening Hours Reminder -->
             <div class="pt-6 border-t border-primary-dark/10">
-              <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ bestCallTimesTitle }}</h3>
-              <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
-                <p class="text-sm md:text-base text-primary-dark/70 mb-3">
+              <h3 class="text-xs sm:text-sm uppercase tracking-widest text-primary-red mb-4 font-semibold">{{ bestCallTimesTitle }}</h3>
+              <div class="bg-white p-4 sm:p-5 rounded-lg border border-primary-dark/10">
+                <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 mb-4 leading-relaxed">
                   {{ bestCallTimesDescription }}
                 </p>
-                <div class="space-y-2 text-sm md:text-base text-primary-dark">
+                <div class="space-y-3 text-sm sm:text-base md:text-lg text-primary-dark">
                   <div 
                     v-for="(timeSlot, index) in bestCallTimes" 
                     :key="index" 
-                    class="flex justify-between items-center"
+                    class="flex justify-between items-center py-1"
                   >
                     <span class="font-light">{{ timeSlot.days }}</span>
                     <span class="font-medium">{{ timeSlot.time }}</span>
