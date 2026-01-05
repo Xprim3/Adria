@@ -19,8 +19,10 @@ const PORT = process.env.PORT || 3000
 // Middleware
 const allowedOrigins = process.env.NODE_ENV === 'production'
   ? [
-      process.env.FRONTEND_URL || 'https://pizzeriaadria.de',
-      process.env.FRONTEND_URL_WWW || 'https://www.pizzeriaadria.de'
+      process.env.FRONTEND_URL || 'https://adriatrier.de',
+      process.env.FRONTEND_URL_WWW || 'https://www.adriatrier.de',
+      'https://adriatrier.de',
+      'https://www.adriatrier.de'
     ]
   : ['http://localhost:5173', 'http://localhost:3000']
 
@@ -29,9 +31,13 @@ app.use(cors({
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true)
     
+    // Allow if in allowed origins list or development mode
     if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
       callback(null, true)
     } else {
+      // Log for debugging
+      console.log('CORS blocked origin:', origin)
+      console.log('Allowed origins:', allowedOrigins)
       callback(new Error('Not allowed by CORS'))
     }
   },
