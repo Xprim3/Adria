@@ -9,7 +9,7 @@
     ]"
   >
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="flex items-center justify-between h-16 md:h-20">
+      <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo -->
         <div class="flex-shrink-0">
           <a 
@@ -19,7 +19,7 @@
           >
             <!-- Decorative divider -->
             <div 
-              class="hidden md:block w-px h-10"
+              class="hidden lg:block w-px h-10"
               :class="isScrolled 
                 ? 'bg-gradient-to-b from-primary-red via-primary-banner to-transparent opacity-60' 
                 : 'bg-gradient-to-b from-white/80 via-white/60 to-transparent opacity-100'
@@ -27,19 +27,19 @@
             ></div>
             
             <h1 
-              class="text-xl md:text-2xl lg:text-3xl font-restaurant font-normal tracking-wide"
+              class="text-2xl lg:text-3xl xl:text-4xl font-restaurant font-normal tracking-wide"
               :class="isScrolled 
                 ? 'text-primary-red' 
                 : 'text-white drop-shadow-lg'
               "
             >
-              Pizzeria Adria
+              Adria
             </h1>
           </a>
         </div>
 
         <!-- Desktop Navigation - Clean Color Transitions Only -->
-        <ul class="hidden md:flex items-center gap-2 lg:gap-4" ref="navListRef">
+        <ul class="hidden lg:flex items-center gap-3 xl:gap-4" ref="navListRef">
           <li 
             v-for="item in navItems" 
             :key="item.id"
@@ -49,7 +49,7 @@
               :href="item.href"
               @click.prevent="scrollToSection(item.id)"
               :class="[
-                'nav-link px-4 lg:px-5 py-2.5 text-sm lg:text-base font-medium transition-colors duration-300',
+                'nav-link px-3 xl:px-4 py-2.5 text-sm xl:text-base font-medium transition-colors duration-300 whitespace-nowrap',
                 isScrolled
                   ? activeSection === item.id
                     ? 'text-primary-red'
@@ -64,11 +64,11 @@
           </li>
         </ul>
 
-        <!-- Mobile Menu Button -->
+        <!-- Mobile/Tablet Menu Button -->
         <button
           @click="toggleMobileMenu"
           ref="mobileButtonRef"
-          class="md:hidden p-2 transition-colors duration-300"
+          class="lg:hidden p-2 transition-colors duration-300"
           :class="isScrolled ? 'text-primary-red hover:text-primary-banner' : 'text-white hover:text-primary-red'"
           aria-label="Toggle menu"
         >
@@ -97,46 +97,75 @@
         </button>
       </div>
 
-      <!-- Mobile Menu -->
-      <Transition
-        enter-active-class="transition-all duration-300 ease-out"
-        enter-from-class="opacity-0 max-h-0"
-        enter-to-class="opacity-100 max-h-96"
-        leave-active-class="transition-all duration-200 ease-in"
-        leave-from-class="opacity-100 max-h-96"
-        leave-to-class="opacity-0 max-h-0"
-      >
+      <!-- Mobile Menu Overlay -->
+      <Teleport to="body">
+        <Transition
+          enter-active-class="transition-opacity duration-300"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-opacity duration-300"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <div
+            v-if="isMobileMenuOpen"
+            @click="toggleMobileMenu"
+            class="lg:hidden fixed inset-0 bg-black/50 z-[9998]"
+          ></div>
+        </Transition>
+      </Teleport>
+
+      <!-- Mobile Menu Sidebar -->
+      <Teleport to="body">
+        <Transition
+          enter-active-class="transition-transform duration-300 ease-out"
+          enter-from-class="translate-x-full"
+          enter-to-class="translate-x-0"
+          leave-active-class="transition-transform duration-300 ease-in"
+          leave-from-class="translate-x-0"
+          leave-to-class="translate-x-full"
+        >
         <div
           v-if="isMobileMenuOpen"
-          class="md:hidden mt-2 pt-4 pb-2 rounded-lg backdrop-blur-md"
-          :class="isScrolled ? 'bg-white/95 border-t border-primary-red/20' : 'bg-black/30 border-t border-white/20'"
+          class="lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-[9999] overflow-y-auto"
         >
-          <ul class="space-y-1">
-            <li 
-              v-for="(item, index) in navItems" 
-              :key="item.id"
-              :ref="el => { if (el) mobileItemRefs[index] = el as HTMLLIElement }"
+          <!-- Header with Close Button -->
+          <div class="sticky top-0 bg-white border-b border-gray-100 px-5 py-4 flex items-center justify-end z-10">
+            <button
+              @click="toggleMobileMenu"
+              class="p-1.5 text-gray-400 hover:text-primary-red hover:bg-gray-50 rounded-full transition-all duration-200"
+              aria-label="Close menu"
             >
-              <a
-                :href="item.href"
-                @click.prevent="scrollToSection(item.id)"
-                :class="[
-                  'block py-3 px-4 rounded-md text-base font-medium transition-all duration-200',
-                  isScrolled
-                    ? activeSection === item.id
-                      ? 'text-primary-red bg-background-cream font-semibold'
-                      : 'text-primary-dark hover:text-primary-red hover:bg-background-cream'
-                    : activeSection === item.id
-                      ? 'text-white bg-white/20 font-semibold'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
-                ]"
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Menu Items -->
+          <div class="px-4 py-6">
+            <ul class="space-y-1">
+              <li 
+                v-for="(item, index) in navItems" 
+                :key="item.id"
+                :ref="el => { if (el) mobileItemRefs[index] = el as HTMLLIElement }"
               >
-                {{ item.label }}
-              </a>
-            </li>
-          </ul>
+                <a
+                  :href="item.href"
+                  @click.prevent="scrollToSection(item.id)"
+                  class="flex items-center py-2.5 px-4 rounded-lg text-sm font-medium transition-all duration-200 text-primary-dark hover:text-primary-red hover:bg-primary-red/5 active:bg-primary-red/10"
+                >
+                  <span class="flex-1">{{ item.label }}</span>
+                  <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </Transition>
+      </Teleport>
     </div>
   </nav>
 </template>
@@ -156,7 +185,6 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: 'home', label: 'Startseite', href: '#home' },
   { id: 'about', label: 'Über Uns', href: '#about' },
   { id: 'news', label: 'Neuigkeiten', href: '#news' },
   { id: 'menu', label: 'Speisekarte', href: '#menu' },

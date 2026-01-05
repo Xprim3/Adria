@@ -66,7 +66,8 @@
               <h4 class="text-xs uppercase tracking-wider text-white/80 mb-3 font-semibold">Folgen Sie uns</h4>
               <div class="flex items-center gap-3">
                 <a
-                  href="https://www.facebook.com"
+                  v-if="facebookUrl"
+                  :href="facebookUrl"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="w-9 h-9 rounded-full bg-white/10 hover:bg-primary-red flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -77,7 +78,8 @@
                   </svg>
                 </a>
                 <a
-                  href="https://www.instagram.com"
+                  v-if="instagramUrl"
+                  :href="instagramUrl"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="w-9 h-9 rounded-full bg-white/10 hover:bg-primary-red flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -88,7 +90,8 @@
                   </svg>
                 </a>
                 <a
-                  href="https://www.tripadvisor.com"
+                  v-if="tripadvisorUrl"
+                  :href="tripadvisorUrl"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="w-9 h-9 rounded-full bg-white/10 hover:bg-primary-red flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -118,9 +121,46 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
+// Default social media URLs (fallback)
+const defaultFacebookUrl = 'https://www.facebook.com'
+const defaultInstagramUrl = 'https://www.instagram.com'
+const defaultTripadvisorUrl = 'https://www.tripadvisor.com'
+
+const facebookUrl = ref(defaultFacebookUrl)
+const instagramUrl = ref(defaultInstagramUrl)
+const tripadvisorUrl = ref(defaultTripadvisorUrl)
 
 const currentYear = computed(() => new Date().getFullYear())
+
+// Load footer content from API
+const loadFooterContent = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/footer`)
+    const data = await response.json()
+    
+    // Load Facebook URL
+    if (data.facebook?.value) {
+      facebookUrl.value = data.facebook.value
+    }
+    
+    // Load Instagram URL
+    if (data.instagram?.value) {
+      instagramUrl.value = data.instagram.value
+    }
+    
+    // Load TripAdvisor URL
+    if (data.tripadvisor?.value) {
+      tripadvisorUrl.value = data.tripadvisor.value
+    }
+  } catch (error) {
+    console.error('Error loading footer content:', error)
+    // Keep default values on error
+  }
+}
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId)
@@ -135,4 +175,9 @@ const scrollToSection = (sectionId: string) => {
     })
   }
 }
+
+onMounted(async () => {
+  // Load content from API
+  await loadFooterContent()
+})
 </script>

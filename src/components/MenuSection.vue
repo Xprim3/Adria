@@ -40,8 +40,24 @@
               <!-- Quote Section -->
               <div class="flex-1 flex items-center justify-center py-8">
                 <div class="space-y-8 md:space-y-10 w-full">
-                  <!-- Quote 1 -->
-                  <div class="text-center">
+                  <template v-if="validQuotes.length > 0">
+                    <div 
+                      v-for="(quote, index) in validQuotes" 
+                      :key="index"
+                      class="text-center"
+                    >
+                      <div class="flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                      </div>
+                      <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
+                        "{{ quote }}"
+                      </blockquote>
+                    </div>
+                  </template>
+                  <!-- Fallback if no quotes -->
+                  <div v-else class="text-center">
                     <div class="flex items-center justify-center mb-4">
                       <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -49,30 +65,6 @@
                     </div>
                     <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
                       "Man braucht keine silberne Gabel, um gutes Essen zu genießen."
-                    </blockquote>
-                  </div>
-
-                  <!-- Quote 2 -->
-                  <div class="text-center">
-                    <div class="flex items-center justify-center mb-4">
-                      <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                      </svg>
-                    </div>
-                    <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
-                      "Gutes Essen ist die Grundlage echter Zufriedenheit."
-                    </blockquote>
-                  </div>
-
-                  <!-- Quote 3 -->
-                  <div class="text-center">
-                    <div class="flex items-center justify-center mb-4">
-                      <svg class="w-6 h-6 md:w-7 md:h-7 text-primary-red/40" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                      </svg>
-                    </div>
-                    <blockquote class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed italic px-4 font-medium" style="font-family: 'Playfair Display', serif;">
-                      "Man kann nicht gut denken, lieben und schlafen, wenn man nicht gut gegessen hat."
                     </blockquote>
                   </div>
                 </div>
@@ -122,9 +114,9 @@
               </div>
 
               <!-- Action Buttons -->
-              <div class="space-y-3">
+              <div class="space-y-3" v-if="pdfUrl">
                 <a
-                  :href="pdfMenus[0].url"
+                  :href="pdfUrl"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-primary-red to-primary-banner text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] group"
@@ -136,7 +128,7 @@
                   <span>Vollständige Speisekarte ansehen</span>
                 </a>
                 <a
-                  :href="pdfMenus[0].url"
+                  :href="pdfUrl"
                   download
                   class="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white text-primary-red border-2 border-primary-red/30 hover:border-primary-red hover:bg-primary-red/5 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] group"
                 >
@@ -156,7 +148,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -164,16 +156,18 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
 const menuBookRef = ref<HTMLElement | null>(null)
 
-const pdfMenus = [
-  { 
-    name: 'Full Menu', 
-    url: 'http://www.pizzeriaadria-trier.de/flyer/Adria-Speisekarte-Flyer.pdf' 
-  },
+// Default values (fallback)
+const defaultPdfUrl = 'http://www.pizzeriaadria-trier.de/flyer/Adria-Speisekarte-Flyer.pdf'
+const defaultQuotes = [
+  'Man braucht keine silberne Gabel, um gutes Essen zu genießen.',
+  'Gutes Essen ist die Grundlage echter Zufriedenheit.',
+  'Man kann nicht gut denken, lieben und schlafen, wenn man nicht gut gegessen hat.'
 ]
-
-const menuCategories = [
+const defaultCategories = [
   { name: 'Pizza', count: '20+' },
   { name: 'Pasta', count: '25+' },
   { name: 'Antipasti', count: '15+' },
@@ -182,7 +176,59 @@ const menuCategories = [
   { name: 'Desserts', count: '8+' },
 ]
 
-onMounted(() => {
+const pdfUrl = ref(defaultPdfUrl)
+const quotes = ref<string[]>(defaultQuotes)
+const menuCategories = ref(defaultCategories)
+
+// Filter out empty quotes
+const validQuotes = computed(() => {
+  return quotes.value.filter(q => q && q.trim())
+})
+
+// Load menu content from API
+const loadMenuContent = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/menu`)
+    const data = await response.json()
+    
+    // Load PDF URL
+    if (data.pdfUrl?.value) {
+      pdfUrl.value = data.pdfUrl.value
+    }
+    
+    // Load quotes
+    if (data.quotes?.value) {
+      try {
+        const parsedQuotes = JSON.parse(data.quotes.value)
+        if (Array.isArray(parsedQuotes) && parsedQuotes.length > 0) {
+          quotes.value = parsedQuotes.filter((q: string) => q && q.trim())
+        }
+      } catch (e) {
+        console.error('Error parsing quotes:', e)
+      }
+    }
+    
+    // Load menu categories
+    if (data.categories?.value) {
+      try {
+        const parsedCategories = JSON.parse(data.categories.value)
+        if (Array.isArray(parsedCategories) && parsedCategories.length > 0) {
+          menuCategories.value = parsedCategories
+        }
+      } catch (e) {
+        console.error('Error parsing categories:', e)
+      }
+    }
+  } catch (error) {
+    console.error('Error loading menu content:', error)
+    // Keep default values on error
+  }
+}
+
+onMounted(async () => {
+  // Load content from API
+  await loadMenuContent()
+  
   // Animate menu book
   if (menuBookRef.value) {
     gsap.fromTo(menuBookRef.value,

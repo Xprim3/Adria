@@ -51,4 +51,16 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+      
+      - name: Check deployment status
+        if: steps.deployment.outcome == 'failure'
+        run: |
+          echo "::error::GitHub Pages deployment failed!"
+          echo "::error::Please enable GitHub Pages manually:"
+          echo "::error::1. Go to: https://github.com/${{ github.repository }}/settings/pages"
+          echo "::error::2. Under 'Source', select 'GitHub Actions'"
+          echo "::error::3. Click 'Save'"
+          echo "::error::4. Wait 1-2 minutes, then re-run this workflow"
+          exit 1
 

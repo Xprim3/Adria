@@ -1,16 +1,20 @@
 # GitHub Pages Setup Instructions
 
-## Error: "Get Pages site failed"
+## Error: "Resource not accessible by integration"
 
-This error occurs when GitHub Pages is not enabled for your repository. Follow these steps to fix it:
+This error occurs when GitHub Actions doesn't have permission to enable Pages automatically. **You must enable Pages manually first.**
 
-## Option 1: Enable GitHub Pages Manually (Recommended)
+## ⚠️ REQUIRED: Enable GitHub Pages Manually First
+
+**You MUST do this before the workflow can deploy:**
 
 1. Go to your repository on GitHub
 2. Click on **Settings** (top menu)
 3. Scroll down to **Pages** in the left sidebar
 4. Under **Source**, select **"GitHub Actions"**
 5. Click **Save**
+
+**Important:** The workflow cannot enable Pages automatically due to GitHub's permission restrictions. You must enable it manually once, then the workflow can deploy.
 
 ## Option 2: Use the Workflow with Auto-Enable
 

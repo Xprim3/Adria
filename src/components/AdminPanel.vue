@@ -303,16 +303,26 @@
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
                     placeholder="https://..."
                   />
+                  <p class="mt-1 text-xs text-gray-500">Current: {{ menuContent.pdfUrl || 'Not set' }}</p>
                 </div>
+                
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Quotes</label>
-                  <div v-for="(_, index) in menuContent.quotes" :key="index" class="mb-3">
-                    <textarea
-                      v-model="menuContent.quotes[index]"
-                      rows="2"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
-                      placeholder="Quote text..."
-                    ></textarea>
+                  <div v-for="(quote, index) in menuContent.quotes" :key="index" class="mb-3">
+                    <div class="flex gap-2">
+                      <textarea
+                        v-model="menuContent.quotes[index]"
+                        rows="2"
+                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red"
+                        placeholder="Quote text..."
+                      ></textarea>
+                      <button
+                        @click="menuContent.quotes.splice(index, 1)"
+                        class="px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 text-sm"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                   <button
                     @click="menuContent.quotes.push('')"
@@ -321,6 +331,45 @@
                     + Add Quote
                   </button>
                 </div>
+
+                <div class="border-t pt-4 mt-4">
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Menu Categories</label>
+                    <p class="text-xs text-gray-500 mt-1">Edit existing categories only</p>
+                  </div>
+                  <div class="space-y-3">
+                    <div 
+                      v-for="(category, index) in menuContent.categories" 
+                      :key="index" 
+                      class="border border-gray-200 rounded-lg p-3"
+                    >
+                      <div class="mb-2">
+                        <h4 class="font-medium text-sm">Category {{ index + 1 }}</h4>
+                      </div>
+                      <div class="grid grid-cols-2 gap-3">
+                        <div>
+                          <label class="block text-xs text-gray-600 mb-1">Name</label>
+                          <input
+                            v-model="category.name"
+                            type="text"
+                            class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md"
+                            placeholder="e.g. Pizza, Pasta"
+                          />
+                        </div>
+                        <div>
+                          <label class="block text-xs text-gray-600 mb-1">Count</label>
+                          <input
+                            v-model="category.count"
+                            type="text"
+                            class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md"
+                            placeholder="e.g. 20+, 25+"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <button
                   @click="saveSection('menu')"
                   class="w-full sm:w-auto px-6 py-2 bg-primary-red text-white rounded-lg hover:bg-primary-red/90 text-sm sm:text-base"
@@ -862,47 +911,124 @@ const aboutContent = ref({
 })
 
 const menuContent = ref({
-  pdfUrl: '',
-  quotes: ['']
+  pdfUrl: 'http://www.pizzeriaadria-trier.de/flyer/Adria-Speisekarte-Flyer.pdf',
+  quotes: [
+    'Man braucht keine silberne Gabel, um gutes Essen zu genießen.',
+    'Gutes Essen ist die Grundlage echter Zufriedenheit.',
+    'Man kann nicht gut denken, lieben und schlafen, wenn man nicht gut gegessen hat.'
+  ],
+  categories: [
+    { name: 'Pizza', count: '20+' },
+    { name: 'Pasta', count: '25+' },
+    { name: 'Antipasti', count: '15+' },
+    { name: 'Risotto', count: '5+' },
+    { name: 'Meat Specialties', count: '30+' },
+    { name: 'Desserts', count: '8+' },
+  ]
 })
 
 const reservationContent = ref({
-  heading: '',
-  description: '',
-  phone: '',
-  email: '',
-  images: ['', '', '', '']
+  heading: 'Reservierungen',
+  description: 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.',
+  phone: '+49 651 966 45 88',
+  email: 'reservations@pizzeriaadria.de',
+  images: [
+    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80'
+  ]
 })
 
 const deliveryContent = ref({
-  heading: '',
-  description: '',
-  phone: '',
-  lieferandoLink: '',
-  images: ['', '', '', '']
+  heading: 'Lieferung',
+  description: 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.',
+  phone: '+49 651 966 45 88',
+  lieferandoLink: 'https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier',
+  images: [
+    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80'
+  ]
 })
 
 const locationContent = ref({
-  heading: '',
-  description: '',
-  address: '',
-  phone: '',
-  email: '',
+  heading: 'Finden Sie uns',
+  description: 'Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.',
+  address: 'Koblenzer Str. 1F\n54293 Trier\nGermany',
+  phone: '+49 651 966 45 88',
+  email: 'info@pizzeriaadria.de',
   openingHours: [
-    { days: '', time: '' }
+    { days: 'Montag – Donnerstag', time: '11:30 – 22:00 Uhr' },
+    { days: 'Freitag – Samstag', time: '11:30 – 23:00 Uhr' },
+    { days: 'Sonntag', time: '12:00 – 22:00 Uhr' }
   ]
 })
 
 const testimonialsContent = ref({
   items: [
-    { text: '', author: '', date: '', rating: 5 }
+    {
+      rating: 5,
+      text: 'Absolutely fantastic pizza! The wood-fired crust was perfect and the ingredients were fresh. The service was excellent and the atmosphere was warm and welcoming. Highly recommend!',
+      author: 'Michael Schmidt',
+      date: '2024-01-15'
+    },
+    {
+      rating: 5,
+      text: 'Best Italian restaurant in Trier-Quint! The pasta was homemade and delicious, and the staff was very friendly. We will definitely be back soon.',
+      author: 'Sarah Müller',
+      date: '2024-01-10'
+    },
+    {
+      rating: 5,
+      text: 'Authentic Italian flavors that remind me of my trip to Italy. The Margherita pizza was outstanding, and the tiramisu was the perfect ending to our meal.',
+      author: 'Thomas Weber',
+      date: '2024-01-08'
+    },
+    {
+      rating: 5,
+      text: 'Great food, great service, great prices! The restaurant has a cozy atmosphere and the owner was very welcoming. The pizza selection is impressive.',
+      author: 'Anna Fischer',
+      date: '2024-01-05'
+    },
+    {
+      rating: 5,
+      text: 'We ordered delivery and the food arrived hot and fresh. The packaging was excellent and everything tasted amazing. Will order again!',
+      author: 'David Klein',
+      date: '2024-01-03'
+    },
+    {
+      rating: 5,
+      text: 'Perfect place for a family dinner. The kids loved the pizza and we adults enjoyed the wine selection. The staff accommodated all our requests.',
+      author: 'Julia Hoffmann',
+      date: '2023-12-28'
+    },
+    {
+      rating: 5,
+      text: 'The ambiance is perfect for a romantic dinner. The food quality is exceptional and the wine pairing suggestions were spot on. We had an amazing evening!',
+      author: 'Robert Wagner',
+      date: '2024-01-12'
+    },
+    {
+      rating: 5,
+      text: 'Outstanding service from start to finish. The staff made us feel like family and the authentic Italian dishes brought back memories of our trip to Rome.',
+      author: 'Maria Schneider',
+      date: '2024-01-14'
+    },
+    {
+      rating: 5,
+      text: 'Best pizza in the region! The ingredients are always fresh and the flavors are authentic. We come here regularly and are never disappointed.',
+      author: 'Peter Hoffmann',
+      date: '2024-01-16'
+    }
   ]
 })
 
 const footerContent = ref({
-  facebook: '',
-  instagram: '',
-  tripadvisor: ''
+  facebook: 'https://www.facebook.com',
+  instagram: 'https://www.instagram.com',
+  tripadvisor: 'https://www.tripadvisor.com'
 })
 
 const newsItems = ref<any[]>([])
@@ -1009,50 +1135,275 @@ const loadSection = async (section: string) => {
         }
         break
       case 'menu':
-        menuContent.value = {
-          pdfUrl: data.pdfUrl?.value || '',
-          quotes: data.quotes ? JSON.parse(data.quotes.value || '[]') : ['']
+        // Default values (same as frontend)
+        const defaultPdfUrl = 'http://www.pizzeriaadria-trier.de/flyer/Adria-Speisekarte-Flyer.pdf'
+        const defaultQuotes = [
+          'Man braucht keine silberne Gabel, um gutes Essen zu genießen.',
+          'Gutes Essen ist die Grundlage echter Zufriedenheit.',
+          'Man kann nicht gut denken, lieben und schlafen, wenn man nicht gut gegessen hat.'
+        ]
+        const defaultCategories = [
+          { name: 'Pizza', count: '20+' },
+          { name: 'Pasta', count: '25+' },
+          { name: 'Antipasti', count: '15+' },
+          { name: 'Risotto', count: '5+' },
+          { name: 'Meat Specialties', count: '30+' },
+          { name: 'Desserts', count: '8+' },
+        ]
+        
+        // Load PDF URL - use database value if exists, otherwise default
+        const loadedPdfUrl = data.pdfUrl?.value ? data.pdfUrl.value : defaultPdfUrl
+        
+        // Load quotes - use database value if exists, otherwise default
+        let loadedQuotes = defaultQuotes
+        if (data.quotes?.value) {
+          try {
+            const parsed = JSON.parse(data.quotes.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              // Keep all quotes including empty ones for editing
+              loadedQuotes = parsed
+            }
+          } catch (e) {
+            console.error('Error parsing quotes:', e)
+          }
         }
+        
+        // Load categories - use database value if exists, otherwise default
+        let loadedCategories = defaultCategories
+        if (data.categories?.value) {
+          try {
+            const parsed = JSON.parse(data.categories.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              loadedCategories = parsed
+            }
+          } catch (e) {
+            console.error('Error parsing categories:', e)
+          }
+        }
+        
+        menuContent.value = {
+          pdfUrl: loadedPdfUrl,
+          quotes: loadedQuotes,
+          categories: loadedCategories
+        }
+        
+        console.log('Menu content loaded:', menuContent.value)
         break
       case 'reservation':
-        reservationContent.value = {
-          heading: data.heading?.value || '',
-          description: data.description?.value || '',
-          phone: data.phone?.value || '',
-          email: data.email?.value || '',
-          images: data.images ? JSON.parse(data.images.value || '[]') : ['', '', '', '']
+        // Default values (same as frontend)
+        const defaultHeading = 'Reservierungen'
+        const defaultDescription = 'Wir nehmen gerne Reservierungen für Gruppen jeder Größe entgegen. Ob Sie ein romantisches Dinner zu zweit oder eine Feier mit Familie und Freunden planen, wir sind hier, um Ihr kulinarisches Erlebnis besonders zu gestalten.'
+        const defaultPhone = '+49 651 966 45 88'
+        const defaultEmail = 'reservations@pizzeriaadria.de'
+        const defaultImages = [
+          'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+          'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+          'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+          'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80'
+        ]
+        
+        // Load images - use database value if exists, otherwise default
+        let loadedImages = defaultImages
+        if (data.images?.value) {
+          try {
+            const parsed = JSON.parse(data.images.value)
+            if (Array.isArray(parsed) && parsed.length >= 4) {
+              // Ensure we have 4 images, fill with defaults if needed
+              loadedImages = parsed.map((url: string, index: number) => 
+                url || defaultImages[index]
+              )
+            }
+          } catch (e) {
+            console.error('Error parsing images:', e)
+          }
         }
+        
+        reservationContent.value = {
+          heading: data.heading?.value || defaultHeading,
+          description: data.description?.value || defaultDescription,
+          phone: data.phone?.value || defaultPhone,
+          email: data.email?.value || defaultEmail,
+          images: loadedImages
+        }
+        
+        console.log('Reservation content loaded:', reservationContent.value)
         break
       case 'delivery':
-        deliveryContent.value = {
-          heading: data.heading?.value || '',
-          description: data.description?.value || '',
-          phone: data.phone?.value || '',
-          lieferandoLink: data.lieferandoLink?.value || '',
-          images: data.images ? JSON.parse(data.images.value || '[]') : ['', '', '', '']
+        // Default values (same as frontend)
+        const defaultDeliveryHeading = 'Lieferung'
+        const defaultDeliveryDescription = 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.'
+        const defaultDeliveryPhone = '+49 651 966 45 88'
+        const defaultLieferandoLink = 'https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier'
+        const defaultDeliveryImages = [
+          'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+          'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+          'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+          'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80'
+        ]
+        
+        // Load images - use database value if exists, otherwise default
+        let loadedDeliveryImages = defaultDeliveryImages
+        if (data.images?.value) {
+          try {
+            const parsed = JSON.parse(data.images.value)
+            if (Array.isArray(parsed) && parsed.length >= 4) {
+              // Ensure we have 4 images, fill with defaults if needed
+              loadedDeliveryImages = parsed.map((url: string, index: number) => 
+                url || defaultDeliveryImages[index]
+              )
+            }
+          } catch (e) {
+            console.error('Error parsing delivery images:', e)
+          }
         }
+        
+        deliveryContent.value = {
+          heading: data.heading?.value || defaultDeliveryHeading,
+          description: data.description?.value || defaultDeliveryDescription,
+          phone: data.phone?.value || defaultDeliveryPhone,
+          lieferandoLink: data.lieferandoLink?.value || defaultLieferandoLink,
+          images: loadedDeliveryImages
+        }
+        
+        console.log('Delivery content loaded:', deliveryContent.value)
         break
       case 'location':
-        locationContent.value = {
-          heading: data.heading?.value || '',
-          description: data.description?.value || '',
-          address: data.address?.value || '',
-          phone: data.phone?.value || '',
-          email: data.email?.value || '',
-          openingHours: data.openingHours ? JSON.parse(data.openingHours.value || '[]') : [{ days: '', time: '' }]
+        // Default values (same as frontend)
+        const defaultLocationHeading = 'Finden Sie uns'
+        const defaultLocationDescription = 'Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.'
+        const defaultAddress = 'Koblenzer Str. 1F\n54293 Trier\nGermany'
+        const defaultLocationPhone = '+49 651 966 45 88'
+        const defaultLocationEmail = 'info@pizzeriaadria.de'
+        const defaultOpeningHours = [
+          { days: 'Montag – Donnerstag', time: '11:30 – 22:00 Uhr' },
+          { days: 'Freitag – Samstag', time: '11:30 – 23:00 Uhr' },
+          { days: 'Sonntag', time: '12:00 – 22:00 Uhr' }
+        ]
+        
+        // Load opening hours - use database value if exists, otherwise default
+        let loadedOpeningHours = defaultOpeningHours
+        if (data.openingHours?.value) {
+          try {
+            const parsed = JSON.parse(data.openingHours.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              loadedOpeningHours = parsed
+            }
+          } catch (e) {
+            console.error('Error parsing opening hours:', e)
+          }
         }
+        
+        locationContent.value = {
+          heading: data.heading?.value || defaultLocationHeading,
+          description: data.description?.value || defaultLocationDescription,
+          address: data.address?.value || defaultAddress,
+          phone: data.phone?.value || defaultLocationPhone,
+          email: data.email?.value || defaultLocationEmail,
+          openingHours: loadedOpeningHours
+        }
+        
+        console.log('Location content loaded:', locationContent.value)
         break
       case 'testimonials':
-        testimonialsContent.value = {
-          items: data.items ? JSON.parse(data.items.value || '[]') : [{ text: '', author: '', date: '', rating: 5 }]
+        // Default testimonials (same as frontend)
+        const defaultTestimonials = [
+          {
+            rating: 5,
+            text: 'Absolutely fantastic pizza! The wood-fired crust was perfect and the ingredients were fresh. The service was excellent and the atmosphere was warm and welcoming. Highly recommend!',
+            author: 'Michael Schmidt',
+            date: '2024-01-15'
+          },
+          {
+            rating: 5,
+            text: 'Best Italian restaurant in Trier-Quint! The pasta was homemade and delicious, and the staff was very friendly. We will definitely be back soon.',
+            author: 'Sarah Müller',
+            date: '2024-01-10'
+          },
+          {
+            rating: 5,
+            text: 'Authentic Italian flavors that remind me of my trip to Italy. The Margherita pizza was outstanding, and the tiramisu was the perfect ending to our meal.',
+            author: 'Thomas Weber',
+            date: '2024-01-08'
+          },
+          {
+            rating: 5,
+            text: 'Great food, great service, great prices! The restaurant has a cozy atmosphere and the owner was very welcoming. The pizza selection is impressive.',
+            author: 'Anna Fischer',
+            date: '2024-01-05'
+          },
+          {
+            rating: 5,
+            text: 'We ordered delivery and the food arrived hot and fresh. The packaging was excellent and everything tasted amazing. Will order again!',
+            author: 'David Klein',
+            date: '2024-01-03'
+          },
+          {
+            rating: 5,
+            text: 'Perfect place for a family dinner. The kids loved the pizza and we adults enjoyed the wine selection. The staff accommodated all our requests.',
+            author: 'Julia Hoffmann',
+            date: '2023-12-28'
+          },
+          {
+            rating: 5,
+            text: 'The ambiance is perfect for a romantic dinner. The food quality is exceptional and the wine pairing suggestions were spot on. We had an amazing evening!',
+            author: 'Robert Wagner',
+            date: '2024-01-12'
+          },
+          {
+            rating: 5,
+            text: 'Outstanding service from start to finish. The staff made us feel like family and the authentic Italian dishes brought back memories of our trip to Rome.',
+            author: 'Maria Schneider',
+            date: '2024-01-14'
+          },
+          {
+            rating: 5,
+            text: 'Best pizza in the region! The ingredients are always fresh and the flavors are authentic. We come here regularly and are never disappointed.',
+            author: 'Peter Hoffmann',
+            date: '2024-01-16'
+          }
+        ]
+        
+        // Load testimonials - use database value if exists, otherwise default
+        let loadedTestimonials = defaultTestimonials
+        if (data.items?.value) {
+          try {
+            const parsed = JSON.parse(data.items.value)
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              // Filter out incomplete testimonials
+              const validTestimonials = parsed.filter((item: any) => 
+                item.text && item.text.trim() && 
+                item.author && item.author.trim() && 
+                item.date && 
+                item.rating >= 1 && item.rating <= 5
+              )
+              if (validTestimonials.length > 0) {
+                loadedTestimonials = validTestimonials
+              }
+            }
+          } catch (e) {
+            console.error('Error parsing testimonials:', e)
+          }
         }
+        
+        testimonialsContent.value = {
+          items: loadedTestimonials
+        }
+        
+        console.log('Testimonials content loaded:', testimonialsContent.value)
         break
       case 'footer':
+        // Default social media URLs (same as frontend)
+        const defaultFacebookUrl = 'https://www.facebook.com'
+        const defaultInstagramUrl = 'https://www.instagram.com'
+        const defaultTripadvisorUrl = 'https://www.tripadvisor.com'
+        
         footerContent.value = {
-          facebook: data.facebook?.value || '',
-          instagram: data.instagram?.value || '',
-          tripadvisor: data.tripadvisor?.value || ''
+          facebook: data.facebook?.value || defaultFacebookUrl,
+          instagram: data.instagram?.value || defaultInstagramUrl,
+          tripadvisor: data.tripadvisor?.value || defaultTripadvisorUrl
         }
+        
+        console.log('Footer content loaded:', footerContent.value)
         break
     }
   } catch (error) {
@@ -1089,7 +1440,8 @@ const saveSection = async (section: string) => {
       case 'menu':
         updates = [
           { field: 'pdfUrl', value: menuContent.value.pdfUrl },
-          { field: 'quotes', value: JSON.stringify(menuContent.value.quotes) }
+          { field: 'quotes', value: JSON.stringify(menuContent.value.quotes) },
+          { field: 'categories', value: JSON.stringify(menuContent.value.categories) }
         ]
         break
       case 'reservation':

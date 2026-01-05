@@ -11,7 +11,7 @@
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
-              Lieferung
+              {{ heading || 'Lieferung' }}
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-primary-red/40"></div>
@@ -19,7 +19,7 @@
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
             <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
-              Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.
+              {{ description || 'Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.' }}
             </p>
           </div>
 
@@ -41,8 +41,8 @@
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-2">
                       Rufen Sie uns direkt an, um Ihre Bestellung für Lieferung oder Abholung aufzugeben
                     </p>
-                    <a href="tel:+496519664588" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
-                      +49 651 966 45 88
+                    <a :href="`tel:${phone || '+496519664588'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                      {{ phone || '+49 651 966 45 88' }}
                     </a>
                   </div>
                 </div>
@@ -98,7 +98,7 @@
                   Sie können auch über unseren Partner <strong class="text-primary-dark">Lieferando</strong> bestellen, für bequemes Online-Bestellen.
                 </p>
                 <a 
-                  href="https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier" 
+                  :href="lieferandoLink || 'https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier'" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 text-sm md:text-base text-primary-red hover:text-primary-banner transition-colors font-medium"
@@ -178,10 +178,13 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
 const imagesRef = ref<HTMLElement | null>(null)
 const contentRef = ref<HTMLElement | null>(null)
 
-const images = [
+// Default values (fallback)
+const defaultImages = [
   {
     src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
     alt: 'Essenslieferung in Trier - Pizzeria Adria Lieferservice'
@@ -200,7 +203,63 @@ const images = [
   }
 ]
 
-onMounted(() => {
+const heading = ref('Lieferung')
+const description = ref('Genießen Sie unsere authentische italienische Küche in den eigenen vier Wänden. Wir arbeiten mit Lieferando zusammen, um unsere köstlichen Pizzen, Pasten und Spezialitäten direkt an Ihre Haustür zu bringen.')
+const phone = ref('+49 651 966 45 88')
+const lieferandoLink = ref('https://www.lieferando.de/en/menu/ristorante-pizzeria-adria-trier')
+const images = ref(defaultImages)
+
+// Load delivery content from API
+const loadDeliveryContent = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/delivery`)
+    const data = await response.json()
+    
+    // Load heading
+    if (data.heading?.value) {
+      heading.value = data.heading.value
+    }
+    
+    // Load description
+    if (data.description?.value) {
+      description.value = data.description.value
+    }
+    
+    // Load phone
+    if (data.phone?.value) {
+      phone.value = data.phone.value
+    }
+    
+    // Load lieferandoLink
+    if (data.lieferandoLink?.value) {
+      lieferandoLink.value = data.lieferandoLink.value
+    }
+    
+    // Load images
+    if (data.images?.value) {
+      try {
+        const parsedImages = JSON.parse(data.images.value)
+        if (Array.isArray(parsedImages) && parsedImages.length >= 4) {
+          // Map image URLs to image objects with alt text
+          images.value = parsedImages.map((url: string, index: number) => ({
+            src: url || defaultImages[index].src,
+            alt: defaultImages[index].alt
+          }))
+        }
+      } catch (e) {
+        console.error('Error parsing images:', e)
+      }
+    }
+  } catch (error) {
+    console.error('Error loading delivery content:', error)
+    // Keep default values on error
+  }
+}
+
+onMounted(async () => {
+  // Load content from API
+  await loadDeliveryContent()
+  
   // Animate images container
   if (imagesRef.value) {
     gsap.fromTo(imagesRef.value,

@@ -15,7 +15,7 @@
         class="relative h-[400px] md:h-full w-full order-2 md:order-1 overflow-hidden"
       >
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d754.9471666166667!2d6.7032471!3d49.8231709!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47957df446438395%3A0xc477328cdb45524c!2sPizzeria%20Adria!5e1!3m2!1sde!2sde!4v1767531167302!5m2!1sde!2sde"
+          :src="mapEmbedUrl"
           width="100%"
           height="100%"
           style="border:0;"
@@ -35,7 +35,7 @@
           <!-- Section Header -->
           <div class="mb-6 md:mb-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-restaurant font-normal text-primary-dark mb-4 md:mb-5" style="font-family: 'Italianno', cursive;">
-              Finden Sie uns
+              {{ heading || 'Finden Sie uns' }}
             </h2>
             <div class="flex items-center gap-3 my-4 md:my-5">
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-primary-red/40"></div>
@@ -43,7 +43,7 @@
               <div class="w-12 md:w-16 h-px bg-gradient-to-r from-primary-red/40 to-transparent"></div>
             </div>
             <p class="text-sm sm:text-base md:text-lg text-primary-dark/75 leading-relaxed">
-              Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.
+              {{ description || 'Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.' }}
             </p>
           </div>
 
@@ -60,13 +60,9 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm sm:text-base md:text-lg text-primary-dark font-medium mb-2">
-                    Koblenzer Str. 1F<br>
-                    54293 Trier<br>
-                    Germany
-                  </p>
+                  <p class="text-sm sm:text-base md:text-lg text-primary-dark font-medium mb-2" v-html="formattedAddress"></p>
                   <a 
-                    href="https://maps.app.goo.gl/HLMABPcUAv37hV1H7" 
+                    :href="mapsLink" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium"
@@ -93,8 +89,8 @@
                   </div>
                   <div>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-1">Telefon</p>
-                    <a href="tel:+496519664588" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
-                      +49 651 966 45 88
+                    <a :href="`tel:${phone || '+496519664588'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                      {{ phone || '+49 651 966 45 88' }}
                     </a>
                   </div>
                 </div>
@@ -108,8 +104,8 @@
                   </div>
                   <div>
                     <p class="text-xs sm:text-sm md:text-base text-primary-dark/70 mb-1">E-Mail</p>
-                    <a href="mailto:info@pizzeriaadria.de" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
-                      info@pizzeriaadria.de
+                    <a :href="`mailto:${email || 'info@pizzeriaadria.de'}`" class="text-sm sm:text-base md:text-lg text-primary-red hover:text-primary-banner transition-colors font-medium">
+                      {{ email || 'info@pizzeriaadria.de' }}
                     </a>
                   </div>
                 </div>
@@ -121,18 +117,29 @@
               <h3 class="text-xs uppercase tracking-widest text-primary-red mb-4 font-semibold">Öffnungszeiten</h3>
               <div class="bg-white p-4 rounded-lg border border-primary-dark/10">
                 <div class="space-y-2 text-sm md:text-base text-primary-dark">
-                  <div class="flex justify-between items-center">
-                    <span class="font-light">Montag – Donnerstag</span>
-                    <span class="font-medium">11:30 – 22:00 Uhr</span>
+                  <div 
+                    v-for="(hours, index) in openingHours" 
+                    :key="index"
+                    class="flex justify-between items-center"
+                  >
+                    <span class="font-light">{{ hours.days }}</span>
+                    <span class="font-medium">{{ hours.time }}</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <span class="font-light">Freitag – Samstag</span>
-                    <span class="font-medium">11:30 – 23:00 Uhr</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="font-light">Sonntag</span>
-                    <span class="font-medium">12:00 – 22:00 Uhr</span>
-                  </div>
+                  <!-- Fallback if no opening hours -->
+                  <template v-if="!openingHours || openingHours.length === 0">
+                    <div class="flex justify-between items-center">
+                      <span class="font-light">Montag – Donnerstag</span>
+                      <span class="font-medium">11:30 – 22:00 Uhr</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="font-light">Freitag – Samstag</span>
+                      <span class="font-medium">11:30 – 23:00 Uhr</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="font-light">Sonntag</span>
+                      <span class="font-medium">12:00 – 22:00 Uhr</span>
+                    </div>
+                  </template>
                 </div>
               </div>
             </div>
@@ -144,7 +151,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -152,10 +159,86 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
 const contentRef = ref<HTMLElement | null>(null)
 const mapRef = ref<HTMLElement | null>(null)
 
-onMounted(() => {
+// Default values (fallback)
+const defaultAddress = 'Koblenzer Str. 1F\n54293 Trier\nGermany'
+const defaultOpeningHours = [
+  { days: 'Montag – Donnerstag', time: '11:30 – 22:00 Uhr' },
+  { days: 'Freitag – Samstag', time: '11:30 – 23:00 Uhr' },
+  { days: 'Sonntag', time: '12:00 – 22:00 Uhr' }
+]
+
+const heading = ref('Finden Sie uns')
+const description = ref('Besuchen Sie uns in unserem Restaurant in Trier. Wir sind günstig gelegen und leicht mit dem Auto oder öffentlichen Verkehrsmitteln erreichbar.')
+const address = ref(defaultAddress)
+const phone = ref('+49 651 966 45 88')
+const email = ref('info@pizzeriaadria.de')
+const openingHours = ref(defaultOpeningHours)
+
+// Hardcoded maps URLs (not editable via admin panel)
+const mapsLink = 'https://maps.app.goo.gl/HLMABPcUAv37hV1H7'
+const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d754.9471666166667!2d6.7032471!3d49.8231709!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47957df446438395%3A0xc477328cdb45524c!2sPizzeria%20Adria!5e1!3m2!1sde!2sde!4v1767531167302!5m2!1sde!2sde'
+
+// Format address with line breaks
+const formattedAddress = computed(() => {
+  return address.value.replace(/\n/g, '<br>')
+})
+
+// Load location content from API
+const loadLocationContent = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/location`)
+    const data = await response.json()
+    
+    // Load heading
+    if (data.heading?.value) {
+      heading.value = data.heading.value
+    }
+    
+    // Load description
+    if (data.description?.value) {
+      description.value = data.description.value
+    }
+    
+    // Load address
+    if (data.address?.value) {
+      address.value = data.address.value
+    }
+    
+    // Load phone
+    if (data.phone?.value) {
+      phone.value = data.phone.value
+    }
+    
+    // Load email
+    if (data.email?.value) {
+      email.value = data.email.value
+    }
+    
+    // Load opening hours
+    if (data.openingHours?.value) {
+      try {
+        const parsed = JSON.parse(data.openingHours.value)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          openingHours.value = parsed
+        }
+      } catch (e) {
+        console.error('Error parsing opening hours:', e)
+      }
+    }
+  } catch (error) {
+    console.error('Error loading location content:', error)
+    // Keep default values on error
+  }
+}
+
+onMounted(async () => {
+  // Load content from API
+  await loadLocationContent()
   // Animate map
   if (mapRef.value) {
     gsap.fromTo(mapRef.value,

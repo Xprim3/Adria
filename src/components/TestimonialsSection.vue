@@ -82,7 +82,8 @@ const currentIndex = ref(0)
 const itemsPerSlide = ref(3) // Will be updated based on screen size
 let autoScrollInterval: number | null = null
 
-const reviews = ref<Review[]>([
+// Default reviews (fallback)
+const defaultReviews: Review[] = [
   {
     rating: 5,
     text: 'Absolutely fantastic pizza! The wood-fired crust was perfect and the ingredients were fresh. The service was excellent and the atmosphere was warm and welcoming. Highly recommend!',
@@ -137,7 +138,42 @@ const reviews = ref<Review[]>([
     author: 'Peter Hoffmann',
     date: '2024-01-16'
   }
-])
+]
+
+const reviews = ref<Review[]>(defaultReviews)
+
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
+// Load testimonials from API
+const loadTestimonials = async () => {
+  try {
+    const response = await fetch(`${API_URL}/content/testimonials`)
+    const data = await response.json()
+    
+    if (data.items?.value) {
+      try {
+        const parsed = JSON.parse(data.items.value)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Filter out incomplete testimonials and ensure all required fields
+          const validTestimonials = parsed.filter((item: any) => 
+            item.text && item.text.trim() && 
+            item.author && item.author.trim() && 
+            item.date && 
+            item.rating >= 1 && item.rating <= 5
+          )
+          if (validTestimonials.length > 0) {
+            reviews.value = validTestimonials
+          }
+        }
+      } catch (e) {
+        console.error('Error parsing testimonials:', e)
+      }
+    }
+  } catch (error) {
+    console.error('Error loading testimonials:', error)
+    // Keep default values on error
+  }
+}
 
 // Group reviews based on screen size
 const reviewGroups = computed(() => {
@@ -197,7 +233,10 @@ const resetAutoScroll = () => {
   startAutoScroll()
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // Load testimonials from API
+  await loadTestimonials()
+  
   // Set initial items per slide
   updateItemsPerSlide()
   
